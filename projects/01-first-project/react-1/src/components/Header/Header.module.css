@@ -1,9 +1,9 @@
 .header {
   grid-area: header;
   background: linear-gradient(90deg, rgba(173,213,158,0.8183648459383753) 0%, rgba(60,197,233,0.8687850140056023) 35%, rgba(53,170,151,1) 100%);
-  display: flex;
-  justify-content: start;
-  align-items: center;
+  /* display: flex; */
+  /* justify-content: start; */
+  /* align-items: center; */
 }
 .img {
   width: 50px;

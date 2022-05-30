@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './MyPosts.module.css'
 import Post from './Post/Post';
-console.log('styles', styles);
+// console.log('styles', styles);
 
 const MyPosts = () => {
     return (
