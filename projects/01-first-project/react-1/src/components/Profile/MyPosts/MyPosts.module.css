@@ -1,4 +1,9 @@
-
+.postsBlock {
+  padding: 20px;
+}
 .post {
   width: 500px;
+}
+.posts {
+  margin-top: 10px;
 }
