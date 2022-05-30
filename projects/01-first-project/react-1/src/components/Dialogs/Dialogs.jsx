@@ -2,35 +2,40 @@ import React from 'react'
 import styles from './Dialogs.module.css'
 import { NavLink } from 'react-router-dom'
 
+const DialogItem = (props) => {
+    let path = `/dialogs/${props.id}`
+    return (
+        <div className={`${styles.dialogs} ${styles.active}`}>
+            <NavLink to={path}>{props.name}</NavLink>
+        </div>
+    )
+}
+
+const Message = (props) => {
+
+    return (
+        <div className={styles.message}>{props.message}</div>
+    )
+}
 
 const Dialogs = (props) => {
     return (
         <div className={styles.dialogs}>
             <div className={styles.dialogsItems}>
-                <div className={`${styles.dialog} ${styles.active}`}>
-                   <NavLink to='/dialogs/1'>Sasha</NavLink>
+                <DialogItem name='Sasha' id='1'/>
+                <DialogItem name='Pasha' id='2'/>
+                <DialogItem name='Masha' id='3'/>
+                <DialogItem name='Natasha' id='4'/>
+                <DialogItem name='Olga' id='5'/>
                 </div>
-                <div className={styles.dialog}>
-                    <NavLink to='/dialogs/2'>Pasha</NavLink>
-                </div>
-                <div className={styles.dialog}>
-                    <NavLink to='/dialogs/3'>Masha</NavLink>
-                </div>
-                <div className={styles.dialog}>
-                    <NavLink to='/dialogs/4'>Natasha</NavLink>
-                </div>
-                <div className={styles.dialog}>
-                    <NavLink to='/dialogs/5'>Olga</NavLink>
-                </div>
-            </div>
             <div className={styles.messages}>
-                <div className={styles.message}>Hi!</div>
-                <div className={styles.message}>Hello, my friend</div>
-                <div className={styles.message}>I am not your friend</div>
-                <div className={styles.message}>Whay</div>
-                <div className={styles.message}>Because you don't know how to react</div>
-                <div className={styles.message}>BUT I AM LEARNING</div>
-                <div className={styles.message}>Good, now you are my friend!!!</div>
+                <Message message='Hi!' />
+                <Message message='Hello, my friend' />
+                <Message message='I am not your friend' />
+                <Message message='Whay?' />
+                <Message message='Because you do not know how to react' />
+                <Message message='BUT I AM LEARNING' />
+                <Message message='Good, now you are my friend!!!' />
             </div>
         </div>
     )
