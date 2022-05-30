@@ -2,21 +2,20 @@
 .nav {
     grid-area: nav;
     background-color: yellow;
-}
-.item > a {
-    color: inherit;
-    list-style-type: none;
-    text-decoration: none;
+    padding: 20px;
 }
 .item {
-    color: black;
+    list-style-type: none;
+    text-decoration: none;
     cursor: pointer;
-    transition: all 0.6s;
+    color: black;
+    transition: all 0.5s;
 }
 .item:hover {
     color: blue;
 }
-.item.active {
+.active {
     color: red;
+    text-decoration: none;
 }
 
