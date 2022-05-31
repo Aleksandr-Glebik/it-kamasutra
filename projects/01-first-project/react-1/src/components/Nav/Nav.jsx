@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from './Nav.module.css'
 import { NavLink } from 'react-router-dom'
-console.log('styles', styles);
 
 const Nav = () => {
     return (
