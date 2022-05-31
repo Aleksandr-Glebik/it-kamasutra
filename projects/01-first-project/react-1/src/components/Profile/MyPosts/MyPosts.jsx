@@ -4,7 +4,6 @@ import Post from './Post/Post';
 // console.log('styles', styles);
 
 const MyPosts = (props) => {
-
   let postsElements = props.postsData.map( (post) => {
     return <Post message={post.message} countLike={post.countLike}/>
   })
