@@ -3,15 +3,9 @@ import styles from './MyPosts.module.css'
 import Post from './Post/Post';
 // console.log('styles', styles);
 
-const MyPosts = () => {
+const MyPosts = (props) => {
 
-  let postsData = [
-    {id: 1, message: 'Hi, how are you?', countLike: '20'},
-    {id: 2, message: 'Fine, and You?', countLike: '15'},
-    {id: 3, message: 'Me too', countLike: ''},
-  ]
-
-  let postsElements = postsData.map( (post) => {
+  let postsElements = props.postsData.map( (post) => {
     return <Post message={post.message} countLike={post.countLike}/>
   })
 
