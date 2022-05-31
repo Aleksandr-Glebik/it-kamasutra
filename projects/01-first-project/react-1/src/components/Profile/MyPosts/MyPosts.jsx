@@ -4,6 +4,17 @@ import Post from './Post/Post';
 // console.log('styles', styles);
 
 const MyPosts = () => {
+
+  let postsData = [
+    {id: 1, message: 'Hi, how are you?', countLike: '20'},
+    {id: 2, message: 'Fine, and You?', countLike: '15'},
+    {id: 3, message: 'Me too', countLike: ''},
+  ]
+
+  let postsElements = postsData.map( (post) => {
+    return <Post message={post.message} countLike={post.countLike}/>
+  })
+
     return (
       <div className={styles.postsBlock}>
           <h3>My posts</h3>
@@ -16,8 +27,7 @@ const MyPosts = () => {
             </div>
           </div>
           <div className={styles.posts}>
-            <Post message='Hi, how are you?' countLike='20'/>
-            <Post message='Fine, and You?' countLike='15'/>
+            { postsElements  }
           </div>
       </div>
 
