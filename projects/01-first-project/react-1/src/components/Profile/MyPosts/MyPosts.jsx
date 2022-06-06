@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from './MyPosts.module.css'
 import Post from './Post/Post';
-
 const MyPosts = (props) => {
   let postsElements = props.postsData.map( (post) => {
     return <Post message={post.message} countLike={post.countLike}/>
