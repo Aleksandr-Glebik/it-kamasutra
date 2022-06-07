@@ -9,6 +9,7 @@ import News from './components/News/News';
 import Music from './components/Music/Music';
 import Setting from './components/Setting/Setting';
 import store from './redux/store';
+import DialogsContainer from './components/Dialogs/DialogsContainer'
 
 const App = (props) => {
   return (
@@ -20,13 +21,12 @@ const App = (props) => {
           <Routes>
             <Route path='/dialogs'
               element={
-                <Dialogs store={props.store}/>
+                <DialogsContainer store={props.store}/>
               }
             />
             <Route path='/profile'
               element={
-                <Profile profilePage={props.state.profilePage}
-                         dispatch={props.dispatch}/>
+                <Profile store={props.store}/>
               }
              />
             <Route path='/news' element={<News />} />
