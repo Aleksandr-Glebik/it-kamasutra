@@ -3,21 +3,19 @@ import styles from './users.module.css'
 import * as axios from 'axios'
 import userPhoto from './../../assets/img/user.jpg'
 
-let Users = (props) => {
-    
-    let getUsers = () => {
-        if (props.users.length === 0) {
-            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-                props.setUsers(response.data.items)
-            });
-        }
+class Users extends React.Component {
+
+    constructor(props) {
+        super(props)
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+            this.props.setUsers(response.data.items)
+        });
     }
 
-
-    return <div>
-        <button onClick={getUsers}>Get Users</button>
+    render() {
+        return <div>
             {
-                props.users.map((u ) => {
+                this.props.users.map((u ) => {
                     return <div key={u.id} >
                         <span>
                             <div>
@@ -25,8 +23,8 @@ let Users = (props) => {
                             </div>
                             <div>
                                 {u.followed
-                                ? <button onClick={ () => {props.unfollow(u.id)}}>Unfollow</button>
-                                : <button onClick={ () => {props.follow(u.id)}}>Follow</button>}
+                                ? <button onClick={ () => {this.props.unfollow(u.id)}}>Unfollow</button>
+                                : <button onClick={ () => {this.props.follow(u.id)}}>Follow</button>}
                             </div>
                         </span>
                         <span>
@@ -43,6 +41,7 @@ let Users = (props) => {
                 })
             }
         </div>
+    }
 }
 
 export default Users;
