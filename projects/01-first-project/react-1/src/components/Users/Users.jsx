@@ -36,22 +36,22 @@ let Users = (props) => {
                 "API-KEY": "b14f3ddd-1de3-46f5-9fc3-b0a3d168e1af"
             }
         }).then(response => {
-            if (response.data.resultCode === 0) {
+            if (response.data.resultCode == 0) {
                 props.unfollow(u.id)
             }
         });
                                 }}>Unfollow</button>
                                 : <button onClick={ () => {
-        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{}, {
+        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
             withCredentials: true,
             headers: {
                 "API-KEY": "b14f3ddd-1de3-46f5-9fc3-b0a3d168e1af"
             }
           }).then(response => {
-            if (response.data.resultCode === 0) {
+            if (response.data.resultCode == 0) {
                 props.follow(u.id)
             }
-        });
+          });
                                     }}>Follow</button>}
                             </div>
                         </span>
