@@ -9,3 +9,9 @@
   width: 50px;
   margin-left: 30px;
 }
+.loginBlock {
+  float: right;
+}
+.loginBlock > a {
+  color: aliceblue;
+}
