@@ -11,6 +11,8 @@
   "nav content";
 }
 .app-wrapper-content {
+  max-width: 1280px;
+  width: 100%;
   grid-area: content;
   background-color: gainsboro;
 }

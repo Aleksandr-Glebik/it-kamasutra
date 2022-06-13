@@ -1,13 +1,14 @@
 const SET_USER_DATA = 'SET-USER-DATA'
 
 let initialState = {
-    userId: null,
+    id: null,
     email: null,
     login: null,
     isAuth: false,
 }
 
 const authReducer = (state = initialState, action) => {
+
     switch (action.type) {
         case SET_USER_DATA:
             return {
@@ -20,13 +21,13 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
-export const setAuthUserData = (userId, email, login) => {
+export const setAuthUserData = (id, email, login) => {
     return {
       type: SET_USER_DATA,
       data: {
-        userId,
-        email,
-        login,
+        id: id,
+        email: email,
+        login: login,
       }
     }
 }

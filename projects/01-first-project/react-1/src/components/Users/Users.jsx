@@ -24,7 +24,7 @@ let Users = (props) => {
                         <span>
                             <div>
                                 <NavLink to={'/profile/' + u.id}>
-                                    <img src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.userPhoto}/>
+                                    <img src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.userPhoto} alt="prhoto" />
                                 </NavLink>
                             </div>
                             <div>
@@ -33,10 +33,10 @@ let Users = (props) => {
         axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
             withCredentials: true,
             headers: {
-                // "API-KEY": "ASDASDASDADSASD"
+                "API-KEY": "b14f3ddd-1de3-46f5-9fc3-b0a3d168e1af"
             }
         }).then(response => {
-            if (response.data.resultCode == 0) {
+            if (response.data.resultCode === 0) {
                 props.unfollow(u.id)
             }
         });
@@ -45,10 +45,10 @@ let Users = (props) => {
         axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{}, {
             withCredentials: true,
             headers: {
-                // "API-KEY": "ASDASDASDADSASD"
+                "API-KEY": "b14f3ddd-1de3-46f5-9fc3-b0a3d168e1af"
             }
           }).then(response => {
-            if (response.data.resultCode == 0) {
+            if (response.data.resultCode === 0) {
                 props.follow(u.id)
             }
         });
