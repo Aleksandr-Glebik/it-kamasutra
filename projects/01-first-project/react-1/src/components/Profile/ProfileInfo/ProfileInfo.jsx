@@ -1,6 +1,7 @@
 import React from 'react'
 import Preloader from '../../Common/Preloader/Preloader'
 import styles from './ProfileInfo.module.css'
+import ProfileStatus from './ProfileStatus'
 // console.log('styles', styles);
 
 const ProfileInfo = (props) => {
@@ -10,9 +11,9 @@ const ProfileInfo = (props) => {
 
     return (
       <div>
-        <div>
+        {/* <div>
          <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=874&q=80" className={styles.img}></img>
-        </div>
+        </div> */}
         <div className={styles.descriptionBlock}>
           <h2>{props.profile.aboutMe}</h2>
           <img src={props.profile.photos.large}></img>
@@ -24,6 +25,7 @@ const ProfileInfo = (props) => {
             <li>{props.profile.contacts.instagram}</li>
             <li>{props.profile.contacts.github}</li>
           </ul>
+          <ProfileStatus status={'Hello my friends'} />
         </div>
       </div>
     )
