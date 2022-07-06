@@ -3,8 +3,8 @@ import styles from './Dialogs.module.css'
 import { NavLink } from 'react-router-dom'
 import DialogItem from './DialogItem/DialogItem'
 import Message from './Message/Message'
-import { updateNewMessageBodyCreator, sendMessageCreator } from '../../redux/dialogs-reducer'
 import { Navigate } from 'react-router-dom'
+import { Field, reduxForm } from 'redux-form';
 
 const Dialogs = (props) => {
 
@@ -20,13 +20,8 @@ const Dialogs = (props) => {
 
     let newMessageBody = state.newMessageBody
 
-    let onSendMessageClick = () => {
-        props.onSendMessage()
-    }
-
-    let onNewMessageChange = (event) => {
-        let body =  event.target.value
-        props.updateNewMessageBody(body)
+    let addNewMessage = (values) => {
+        props.onSendMessage(values.newMessageBody)
     }
 
     if (!props.isAuth) {
@@ -42,22 +37,29 @@ const Dialogs = (props) => {
                 <div>
                  { messagesElements }
                 </div>
-                <div>
-                    <div>
-                        <textarea value={ newMessageBody }
-                                  onChange={ onNewMessageChange }
-                                  placeholder='Enter your message'/>
-                    </div>
-                    <div>
-                        <button onClick={ onSendMessageClick }>
-                          Send
-                        </button>
-                    </div>
-                </div>
-
+                <AddMessageFormRedux onSubmit={addNewMessage}/>
             </div>
         </div>
     )
 }
+
+const addMessageForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field component='textarea' name='newMessageBody' placeholder='Enter your message'/>
+            </div>
+            <div>
+                <button>
+                    Send
+                </button>
+            </div>
+        </form>
+    )
+}
+
+const AddMessageFormRedux = reduxForm({
+    form: 'dialogAddMessageForm'
+})(addMessageForm)
 
 export default Dialogs;
