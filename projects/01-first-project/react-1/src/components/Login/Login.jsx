@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { login } from '../../redux/auth-reducer';
 // import {withAuthRedirect} from '../../hoc/withAuthRedirect'
 import { Navigate } from 'react-router-dom'
+import styles from '../Common/FormsControls/FormsControls.module.css'
 
 const maxLength30 = maxLengthCreator(30)
 
@@ -26,6 +27,9 @@ const LoginForm = (props) => {
             <div>
                 <Field type={'checkbox'} name={"rememberMe"} component={Input} /> remember me
             </div>
+            {props.error && <div className={styles.formSummaryError}>
+                {props.error}
+            </div>}
             <div>
                 <button>Login</button>
             </div>
@@ -42,7 +46,7 @@ const Login = (props) => {
     }
 
     if (props.isAuth) {
-        return <Navigate to="/profile/2"/>
+        return <Navigate to="/profile"/>
     }
 
     return (
