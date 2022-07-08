@@ -41,12 +41,12 @@ const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
 
 const Login = (props) => {
     const onSubmit = (formData) => {
-        // console.log('formData', formData);
+        console.log('formData', formData);
         props.login(formData.email, formData.password, formData.rememberMe)
     }
 
     if (props.isAuth) {
-        return <Navigate to="/profile"/>
+        return <Navigate to="/profile/24457"/>
     }
 
     return (
