@@ -1,32 +1,27 @@
 import React from 'react'
 import Preloader from '../../Common/Preloader/Preloader'
 import styles from './ProfileInfo.module.css'
-import ProfileStatus from './ProfileStatus'
 import ProfileStatusWithHooks from './ProfileStatusWithHooks'
-// console.log('styles', styles);
 
-const ProfileInfo = (props) => {
-    if (!props.profile) {
+const ProfileInfo = ({profile, status, updateStatus}) => {
+    if (!profile) {
       return <Preloader />
     }
 
     return (
       <div>
-        {/* <div>
-         <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=874&q=80" className={styles.img}></img>
-        </div> */}
         <div className={styles.descriptionBlock}>
-          <h2>{props.profile.aboutMe}</h2>
-          <img src={props.profile.photos.large}></img>
+          <h2>{profile.aboutMe}</h2>
+          <img src={profile.photos.large}></img>
           <h3>contacts</h3>
           <ul>
-            <li>{props.profile.contacts.facebook}</li>
-            <li>{props.profile.contacts.vk}</li>
-            <li>{props.profile.contacts.twitter}</li>
-            <li>{props.profile.contacts.instagram}</li>
-            <li>{props.profile.contacts.github}</li>
+            <li>{profile.contacts.facebook}</li>
+            <li>{profile.contacts.vk}</li>
+            <li>{profile.contacts.twitter}</li>
+            <li>{profile.contacts.instagram}</li>
+            <li>{profile.contacts.github}</li>
           </ul>
-          <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
+          <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
         </div>
       </div>
     )

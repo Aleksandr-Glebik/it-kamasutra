@@ -10,7 +10,6 @@ import DialogsContainer from './components/Dialogs/DialogsContainer'
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import LoginPage from './components/Login/Login';
-// import {getAuthUserData} from '../src/redux/auth-reducer'
 import { connect } from 'react-redux';
 import {initializeApp} from './redux/app-reducer'
 import Preloader from './components/Common/Preloader/Preloader';
