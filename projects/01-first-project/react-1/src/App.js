@@ -46,6 +46,11 @@ class App extends React.Component {
                   <ProfileContainer />
                 </React.Suspense>
               } />
+              <Route path='/profile/*' element={
+                <React.Suspense fallback={<Preloader />}>
+                  <ProfileContainer />
+                </React.Suspense>
+              } />
               <Route path='/users/*' element={<UsersContainer />} />
               <Route path='/news/*' element={
                 <React.Suspense fallback={<Preloader />}>
