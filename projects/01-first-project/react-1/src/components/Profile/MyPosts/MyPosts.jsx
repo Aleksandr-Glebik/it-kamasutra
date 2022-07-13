@@ -10,7 +10,7 @@ const maxLength15 = maxLengthCreator(15)
 
 const MyPosts = (props) => {
   let postsElements = props.postsData.map( (post) => {
-    return <Post message={post.message} countLike={post.countLike}/>
+    return <Post key={post.id} message={post.message} countLike={post.countLike}/>
   })
 
   let newPostElement = React.createRef()
