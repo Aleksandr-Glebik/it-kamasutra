@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
-import profileReducer from './profile-reducer'
+import profileReducer from './profile-reducer.ts'
 import dialogsReducer from './dialogs-reducer.ts'
 import sidebarReducer from './sidebar-reducer'
 import usersReducer from './users-reducer'
