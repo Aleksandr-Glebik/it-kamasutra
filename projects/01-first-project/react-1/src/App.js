@@ -7,7 +7,7 @@ import Nav from './components/Nav/Nav';
 // import Music from './components/Music/Music';
 // import Setting from './components/Setting/Setting';
 // import DialogsContainer from './components/Dialogs/DialogsContainer'
-import UsersContainer from './components/Users/UsersContainer';
+import UsersContainer from './components/Users/UsersContainer.tsx';
 // import ProfileContainer from './components/Profile/ProfileContainer';
 import LoginPage from './components/Login/Login';
 import { connect } from 'react-redux';
