@@ -1,5 +1,5 @@
 import React from "react"
-import Paginator from '../Common/Paginator/Paginator'
+import Paginator from '../Common/Paginator/Paginator.tsx'
 import User from './User'
 
 let Users = ({currentPage, totalUsersCount, pageSize, onPageChanged, ...props}) => {
