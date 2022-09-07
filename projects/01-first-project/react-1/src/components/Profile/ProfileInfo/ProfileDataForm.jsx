@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form';
-import { Input, Textarea } from '../../Common/FormsControls/FormsControls'
-import { required } from '../../../utils/validators/validators';
+import { Input, Textarea } from '../../Common/FormsControls/FormsControls.tsx'
+import { required } from '../../../utils/validators/validators.ts';
 import styles from './ProfileInfo.module.css'
 import s from '../../Common/FormsControls/FormsControls.module.css'
 

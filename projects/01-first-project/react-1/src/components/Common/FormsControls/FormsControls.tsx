@@ -1,15 +1,27 @@
+import { type } from "os"
 import React from "react"
 import styles from './FormsControls.module.css'
 
-const FormControl = ({input, meta, child, ...props}) => {
-    const hasError = meta.touched && meta.error
+type FormControlParamsType = {
+    meta: {
+        touched: boolean
+        error: string
+    }
+    children: React.ReactNode
+}
+
+type FormControlType = (params: FormControlParamsType) => React.ReactNode
+
+
+const FormControl: FormControlType = ({meta: {touched, error}, children, ...props}) => {
+    const hasError = touched && error
 
     return (
         <div className={styles.formControl + ' ' + (hasError ? styles.error : '')}>
             <div>
-                {props.children}
+                {children}
             </div>
-            { hasError && <span>{meta.error}</span>}
+            { hasError && <span>{error}</span>}
         </div>
     )
 }

@@ -3,8 +3,8 @@ import styles from './MyPosts.module.css'
 import Post from './Post/Post';
 // import { addPostActionCreator, updateNewPostText } from '../../../redux/profile-reducer'
 import { Field, reduxForm } from 'redux-form';
-import { required, maxLengthCreator  } from '../../../utils/validators/validators';
-import {Textarea} from '../.././/Common/FormsControls/FormsControls'
+import { required, maxLengthCreator  } from '../../../utils/validators/validators.ts';
+import {Textarea} from '../../Common/FormsControls/FormsControls.tsx'
 
 const maxLength15 = maxLengthCreator(15)
 

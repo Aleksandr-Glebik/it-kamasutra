@@ -9,7 +9,7 @@ import Nav from './components/Nav/Nav';
 // import DialogsContainer from './components/Dialogs/DialogsContainer'
 import UsersContainer from './components/Users/UsersContainer.tsx';
 // import ProfileContainer from './components/Profile/ProfileContainer';
-import LoginPage from './components/Login/Login';
+import LoginPage from './components/Login/Login.tsx';
 import { connect } from 'react-redux';
 import {initializeApp} from './redux/app-reducer.ts'
 import Preloader from './components/Common/Preloader/Preloader';
