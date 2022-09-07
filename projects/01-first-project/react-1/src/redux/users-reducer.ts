@@ -1,9 +1,9 @@
-import { AppStateType } from './redux-store';
-import { usersAPI } from '../api/api';
+import { AppStateType } from './redux-store'
+import { usersAPI } from '../api/api.ts'
 import {updateObjectInArray} from '../utils/object-helpers'
 import { PhotosType, UserType } from '../types/types'
-import { Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import { Dispatch } from 'redux'
+import { ThunkAction } from 'redux-thunk'
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
