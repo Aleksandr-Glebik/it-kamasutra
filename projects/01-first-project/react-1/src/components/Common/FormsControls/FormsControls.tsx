@@ -2,7 +2,7 @@ import { type } from "os"
 import React from "react"
 import styles from './FormsControls.module.css'
 
-type FormControlParamsType = {
+type FormControlPropsType = {
     meta: {
         touched: boolean
         error: string
@@ -10,10 +10,7 @@ type FormControlParamsType = {
     children: React.ReactNode
 }
 
-type FormControlType = (params: FormControlParamsType) => React.ReactNode
-
-
-const FormControl: FormControlType = ({meta: {touched, error}, children, ...props}) => {
+const FormControl: React.FC<FormControlPropsType> = ({meta: {touched, error}, children, ...props}) => {
     const hasError = touched && error
 
     return (
