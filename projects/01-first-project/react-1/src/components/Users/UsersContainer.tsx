@@ -1,8 +1,7 @@
 import React from 'react';
 import { getUsersSt, getPageSize, getTotalUsersCount, getCurrentPage, getFollowingInProgress, getIsFetching } from '../../redux/users-selectors.ts';
 import { connect } from 'react-redux';
-import {follow, unfollow,  setCurrentPage,
-     toggleFollowingProgress, getUsers} from './../../redux/users-reducer.ts'
+import {follow, unfollow, getUsers} from './../../redux/users-reducer.ts'
 import Users from './Users.tsx'
 import Preloader from '../Common/Preloader/Preloader'
 import {withAuthRedirect} from '../../hoc/withAuthRedirect'

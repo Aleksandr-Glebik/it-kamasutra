@@ -60,12 +60,15 @@ type MapDispatchPropsType = {
     login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
 }
 
+
 type LoginFormValuesType = {
     email: string
     password: string
     rememberMe: boolean
     captcha: string
 }
+
+// type LoginFormValuesTypesKeys = keyof LoginFormValuesType
 
 const Login: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
     const onSubmit = (formData: LoginFormValuesType) => {
