@@ -1,4 +1,4 @@
-import { BaseThunkType, InferActionsTypes } from './redux-store';
+import { BaseThunkType, InferActionsTypes } from './redux-store.tsx';
 import { FormAction, stopSubmit } from "redux-form"
 import { ResultCodesEnum, ResultCodeForCaptchaEnum } from "../api/api.ts"
 import {  securityAPI } from "../api/security-api.ts"

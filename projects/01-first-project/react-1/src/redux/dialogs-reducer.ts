@@ -29,9 +29,6 @@ let initialState = {
     ] as Array<MessagesData>
 }
 
-export type InitialStateType = typeof initialState
-type ActionsType = InferActionsTypes<typeof actions>
-
 const dialogsReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case 'SN/DIALOGS/SEND-MESSAGE':
@@ -49,4 +46,7 @@ export const actions = {
     sendMessageCreator: (newMessageBody: string) => ({type: 'SN/DIALOGS/SEND-MESSAGE', newMessageBody} as const )
 }
 
-export default dialogsReducer;
+export default dialogsReducer
+
+export type InitialStateType = typeof initialState
+type ActionsType = InferActionsTypes<typeof actions>
