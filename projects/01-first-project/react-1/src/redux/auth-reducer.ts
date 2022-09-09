@@ -1,6 +1,6 @@
 import { stopSubmit } from "redux-form"
 // import { authAPI, securityAPI, ResultCodesEnum, ResultCodeForCaptcha } from "../api/api.ts"
-import { ResultCodesEnum, ResultCodeForCaptcha } from "../api/api.ts"
+import { ResultCodesEnum, ResultCodeForCaptchaEnum } from "../api/api.ts"
 import {  securityAPI } from "../api/security-api.ts"
 import { authAPI } from "../api/auth-api.ts"
 
@@ -90,7 +90,7 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
       // success, get auth data
       dispatch(getAuthUserData())
     } else {
-      if (loginData.resultCode === ResultCodeForCaptcha.CapchaIsRequierd) {
+      if (loginData.resultCode === ResultCodeForCaptchaEnum.CapchaIsRequierd) {
         dispatch(getCaptchaUrl())
       }
       let message = loginData.messages.length > 0 ? loginData.messages[0] : 'Common error'
