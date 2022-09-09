@@ -1,4 +1,6 @@
-import { usersAPI, profileAPI } from '../api/api.ts';
+// import { usersAPI, profileAPI } from '../api/api.ts';
+import { profileAPI } from '../api/profile-api.ts';
+import { usersAPI } from '../api/users-api.ts';
 import { stopSubmit } from "redux-form"
 import {PostDataType, ContactsType, PhotosType, ProfileType} from '../types/types'
 

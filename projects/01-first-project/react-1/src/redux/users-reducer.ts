@@ -1,5 +1,6 @@
 import { AppStateType, InferActionsTypes } from './redux-store'
-import { usersAPI } from '../api/api.ts'
+// import { usersAPI } from '../api/api.ts'
+import { usersAPI } from '../api/users-api.ts'
 import {updateObjectInArray} from '../utils/object-helpers'
 import { PhotosType, UserType } from '../types/types'
 import { Dispatch } from 'redux'
