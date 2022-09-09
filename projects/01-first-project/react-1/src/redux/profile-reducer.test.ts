@@ -1,16 +1,19 @@
-import {profileReducer, addPostActionCreator, deletePost} from "./profile-reducer";
+import { actions, profileReducer } from "./profile-reducer";
 
 let state = {
     postsData: [
         {id: 1, message: 'Hi, how are you?', countLike: '20'},
         {id: 2, message: 'Fine, and You?', countLike: '15'},
         {id: 3, message: 'Me too', countLike: ''},
-    ]
+    ],
+    profile: null,
+    status: '',
+    newPostText: ''
 }
 
 test('length must be changed', () => {
     // 1. TEST DATA
-    let action = addPostActionCreator('uje skoro i bydy zarabatuvat mnogo deneggg')
+    let action = actions.addPostActionCreator('uje skoro i bydy zarabatuvat mnogo deneggg')
 
     // 2. ACTION
     let newState = profileReducer(state, action)
@@ -21,7 +24,7 @@ test('length must be changed', () => {
 
 test('message of new post should be correct', () => {
     // 1. TEST DATA
-    let action = addPostActionCreator('uje skoro i bydy zarabatuvat mnogo deneggg')
+    let action = actions.addPostActionCreator('uje skoro i bydy zarabatuvat mnogo deneggg')
 
     // 2. ACTION
     let newState = profileReducer(state, action)
@@ -32,7 +35,7 @@ test('message of new post should be correct', () => {
 
 test('after deleting length of postData should be decrement', () => {
     // 1. TEST DATA
-    let action = deletePost(1)
+    let action = actions.deletePost(1)
 
     // 2. ACTION
     let newState = profileReducer(state, action)
@@ -43,7 +46,7 @@ test('after deleting length of postData should be decrement', () => {
 
 test('after deleting length should not be decrement if id is incorrect', () => {
     // 1. TEST DATA
-    let action = deletePost(1000)
+    let action = actions.deletePost(1000)
 
     // 2. ACTION
     let newState = profileReducer(state, action)
