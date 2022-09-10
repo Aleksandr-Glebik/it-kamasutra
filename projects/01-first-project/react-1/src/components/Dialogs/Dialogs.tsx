@@ -2,10 +2,19 @@ import React from 'react'
 import styles from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem'
 import Message from './Message/Message'
-import { Navigate } from 'react-router-dom'
-import AddMessageForm from './AddMessageForm/AddMessageForm'
+import AddMessageForm from './AddMessageForm/AddMessageForm.tsx'
+import {InitialStateType} from '../../redux/dialogs-reducer.ts'
 
-const Dialogs = (props) => {
+type  PropsType = {
+    dialogsPage: InitialStateType
+    sendMessage: (messageText: string) => void
+}
+
+export type NewMessageFormType = {
+    newMessageBody: string
+}
+
+const Dialogs: React.FC<PropsType> = (props) => {
 
     let state = props.dialogsPage
 
@@ -17,14 +26,8 @@ const Dialogs = (props) => {
         return <Message message={message.message} key={message.id} />
     })
 
-    let newMessageBody = state.newMessageBody
-
-    let addNewMessage = (values) => {
-        props.onSendMessage(values.newMessageBody)
-    }
-
-    if (!props.isAuth) {
-        return <Navigate to="/login"/>
+    let addNewMessage = (values: NewMessageFormType) => {
+        props.sendMessage(values.newMessageBody)
     }
 
     return (

@@ -15,7 +15,7 @@ import {initializeApp} from './redux/app-reducer.ts'
 import Preloader from './components/Common/Preloader/Preloader';
 
 const ProfileContainer = React.lazy( () => import('./components/Profile/ProfileContainer'))
-const DialogsContainer = React.lazy( () => import('./components/Dialogs/DialogsContainer'))
+const DialogsContainer = React.lazy( () => import('./components/Dialogs/DialogsContainer.tsx'))
 const News = React.lazy( () => import('./components/News/News'))
 const Music = React.lazy( () => import('./components/Music/Music'))
 const Setting = React.lazy( () => import('./components/Setting/Setting'))

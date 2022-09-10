@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {follow, unfollow, getUsers} from './../../redux/users-reducer.ts'
 import Users from './Users.tsx'
 import Preloader from '../Common/Preloader/Preloader'
-import {withAuthRedirect} from '../../hoc/withAuthRedirect'
+import {withAuthRedirect} from '../../hoc/withAuthRedirect.tsx'
 import { compose } from 'redux'
 import { UserType } from '../../types/types';
 import { AppStateType } from '../../redux/redux-store';
