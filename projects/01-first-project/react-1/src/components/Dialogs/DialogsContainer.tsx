@@ -4,6 +4,7 @@ import Dialogs from './Dialogs.tsx'
 import {withAuthRedirect} from '../../hoc/withAuthRedirect.tsx'
 import { compose } from 'redux'
 import { AppStateType } from '../../redux/redux-store.ts'
+import React from 'react'
 
 let mapStateToProps = (state: AppStateType) => {
     return {
@@ -11,7 +12,7 @@ let mapStateToProps = (state: AppStateType) => {
     }
 }
 
-export default compose(
+export default compose<React.ComponentType>(
     connect(mapStateToProps, {
         sendMessage: actions.sendMessage
     }),
