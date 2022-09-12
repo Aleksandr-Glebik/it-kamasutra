@@ -1,7 +1,7 @@
 import React from "react"
 import { UserType } from "../../types/types"
 import Paginator from '../Common/Paginator/Paginator.tsx'
-import User from './User'
+import User from './User.tsx'
 
 type PropsType = {
     currentPage: number
