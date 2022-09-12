@@ -10,7 +10,7 @@ import {initializeApp} from './redux/app-reducer.ts'
 import Preloader from './components/Common/Preloader/Preloader'
 import {AppStateType} from './redux/redux-store.tsx'
 
-const ProfileContainer = React.lazy( () => import('./components/Profile/ProfileContainer'))
+const ProfileContainer = React.lazy( () => import('./components/Profile/ProfileContainer.tsx'))
 const DialogsContainer = React.lazy( () => import('./components/Dialogs/DialogsContainer.tsx'))
 const News = React.lazy( () => import('./components/News/News'))
 const Music = React.lazy( () => import('./components/Music/Music'))

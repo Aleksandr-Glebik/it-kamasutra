@@ -1,6 +1,6 @@
 // import React from 'react'
 import { actions } from '../../../redux/profile-reducer.ts'
-import MyPosts from './MyPosts';
+import MyPosts from './MyPosts.tsx';
 import { connect } from 'react-redux'
 
 let mapStateToProps = (state) => {
