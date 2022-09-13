@@ -1,8 +1,8 @@
 import React from 'react';
 import {BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import HeaderContainer from './components/Header/HeaderContainer';
-import Nav from './components/Nav/Nav';
+import HeaderContainer from './components/Header/HeaderContainer.tsx';
+import Nav from './components/Nav/Nav.tsx';
 import UsersContainer from './components/Users/UsersContainer.tsx';
 import LoginPage from './components/Login/Login.tsx';
 import { connect } from 'react-redux';
@@ -12,9 +12,9 @@ import {AppStateType} from './redux/redux-store.tsx'
 
 const ProfileContainer = React.lazy( () => import('./components/Profile/ProfileContainer.tsx'))
 const DialogsContainer = React.lazy( () => import('./components/Dialogs/DialogsContainer.tsx'))
-const News = React.lazy( () => import('./components/News/News'))
-const Music = React.lazy( () => import('./components/Music/Music'))
-const Setting = React.lazy( () => import('./components/Setting/Setting'))
+const News = React.lazy( () => import('./components/News/News.tsx'))
+const Music = React.lazy( () => import('./components/Music/Music.tsx'))
+const Setting = React.lazy( () => import('./components/Setting/Setting.tsx'))
 
 type MapPropsType = ReturnType<typeof mapStateToProps>
 type DispatchPropsType = {

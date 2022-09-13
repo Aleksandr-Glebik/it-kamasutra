@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Nav.module.css'
 import { NavLink } from 'react-router-dom'
 
-const Nav = () => {
+const Nav: React.FC = () => {
     return (
       <nav className={styles.nav}>
         <div>

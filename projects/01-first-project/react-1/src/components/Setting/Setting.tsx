@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Setting.module.css'
 
 
-const Setting = (props) => {
+const Setting: React.FC = (props) => {
     return (
         <div>
            Setting

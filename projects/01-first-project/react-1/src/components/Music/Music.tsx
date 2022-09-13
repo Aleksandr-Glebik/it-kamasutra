@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Music.module.css'
 
 
-const Music = (props) => {
+const Music: React.FC= (props) => {
     return (
         <div>
             Music
