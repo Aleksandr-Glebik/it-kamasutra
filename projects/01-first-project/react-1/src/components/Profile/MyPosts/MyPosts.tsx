@@ -12,17 +12,19 @@ type AddNewPostFormValuesType = {
   newPostText: string
 }
 
-type PropsType = {
+export type MapPropsType = {
   posts: Array<AddNewPostFormValuesType>
+}
+export type DispatchPropsType = {
   onAddPost: (newPostText: string) => void
 }
 
-const MyPosts = (props) => {
+const MyPosts: React.FC<MapPropsType & DispatchPropsType> = (props) => {
   let postsElements = props.postsData.map( (post) => {
     return <Post key={post.id} message={post.message} countLike={post.countLike}/>
   })
 
-  let newPostElement = React.createRef()
+  // let newPostElement = React.createRef()
 
   let onAddPost = (values: AddNewPostFormValuesType) => {
     props.addPost(values.newPostText)

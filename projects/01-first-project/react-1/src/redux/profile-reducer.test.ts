@@ -8,7 +8,7 @@ let state = {
     ],
     profile: null,
     status: '',
-    newPostText: ''
+    // newPostText: ''
 }
 
 test('length must be changed', () => {

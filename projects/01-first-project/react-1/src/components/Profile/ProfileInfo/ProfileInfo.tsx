@@ -8,7 +8,7 @@ import {ProfileType} from '../../../types/types.ts'
 import { ContactsType } from '../../../types/types'
 
 type PropsType = {
-  profile: ProfileType
+  profile: ProfileType | null
   status: string
   updateStatus: (status: string) => void
   isOwner: boolean
