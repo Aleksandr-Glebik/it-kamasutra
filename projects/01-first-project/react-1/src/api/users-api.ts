@@ -4,8 +4,8 @@ import { profileAPI } from './profile-api.ts'
 
 
 export const usersAPI = {
-    getUsers(currentPage = 1, pageSize = 10) {
-        return instance.get<GetItemsType>(`users?page=${currentPage}&count=${pageSize}`)
+    getUsers(currentPage = 1, pageSize = 10, term: string = '') {
+        return instance.get<GetItemsType>(`users?page=${currentPage}&count=${pageSize}&term=${term}`)
             .then(response => {
                 return response.data
             })
@@ -16,8 +16,4 @@ export const usersAPI = {
     unfollow(userId: number) {
         return instance.delete(`follow/${userId}`).then(res => res.data) as Promise<ResponseType>
     },
-    // getProfile(userId: number) {
-    //     console.warn('Obsolete method. Please use profileAPI object')
-    //     return profileAPI.getProfile(userId)
-    // }
 }
