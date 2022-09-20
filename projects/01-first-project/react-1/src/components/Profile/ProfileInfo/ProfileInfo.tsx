@@ -1,5 +1,5 @@
 import React, {useState, useEffect, ChangeEvent} from 'react'
-import Preloader from '../../Common/Preloader/Preloader'
+import Preloader from '../../Common/Preloader/Preloader.tsx'
 import styles from './ProfileInfo.module.css'
 import ProfileStatusWithHooks from './ProfileStatusWithHooks.tsx'
 import userPhoto from '../../../assets/img/user.jpg'

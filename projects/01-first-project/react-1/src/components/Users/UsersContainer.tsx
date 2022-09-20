@@ -3,7 +3,7 @@ import { getUsersSt, getPageSize, getTotalUsersCount, getCurrentPage, getFollowi
 import { connect } from 'react-redux';
 import {follow, unfollow, getUsers} from './../../redux/users-reducer.ts'
 import Users from './Users.tsx'
-import Preloader from '../Common/Preloader/Preloader'
+import Preloader from '../Common/Preloader/Preloader.tsx'
 import {withAuthRedirect} from '../../hoc/withAuthRedirect.tsx'
 import { compose } from 'redux'
 import { UserType } from '../../types/types';

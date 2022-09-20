@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Dialogs.module.css'
-import DialogItem from './DialogItem/DialogItem'
-import Message from './Message/Message'
+import DialogItem from './DialogItem/DialogItem.tsx'
+import Message from './Message/Message.tsx'
 import AddMessageForm from './AddMessageForm/AddMessageForm.tsx'
 import {InitialStateType} from '../../redux/dialogs-reducer.ts'
 
