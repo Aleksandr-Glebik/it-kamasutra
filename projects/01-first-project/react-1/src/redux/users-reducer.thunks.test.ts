@@ -22,10 +22,9 @@ const result: APIResponseType = {
     resultCode: ResultCodesEnum.Success,
 }
 
-userAPIMock.follow.mockReturnValue(Promise.resolve(result))
-userAPIMock.unfollow.mockReturnValue(Promise.resolve(result))
 
 test('success follow thunk', async () => {
+    userAPIMock.follow.mockReturnValue(Promise.resolve(result))
     const thunk = follow(1)
 
     await thunk(dispatchMock, getStateMock, {})
@@ -37,6 +36,7 @@ test('success follow thunk', async () => {
 })
 
 test('success unfollow thunk', async () => {
+    userAPIMock.unfollow.mockReturnValue(Promise.resolve(result))
     const thunk = unfollow(1)
 
     await thunk(dispatchMock, getStateMock, {})
