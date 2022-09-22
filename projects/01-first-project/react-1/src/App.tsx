@@ -3,7 +3,7 @@ import {BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import HeaderContainer from './components/Header/HeaderContainer.tsx';
 import Nav from './components/Nav/Nav.tsx';
-import UsersContainer from './components/Users/UsersContainer.tsx';
+import UsersPage from './components/Users/UsersContainer.tsx';
 import LoginPage from './components/Login/Login.tsx';
 import { connect } from 'react-redux';
 import {initializeApp} from './redux/app-reducer.ts'
@@ -53,7 +53,7 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                   <ProfileContainer />
                 </React.Suspense>
               } />
-              <Route path='/users/*' element={<UsersContainer pageTitle={'Samurai'} />} />
+              <Route path='/users/*' element={<UsersPage pageTitle={'Samurai'} />} />
               <Route path='/news/*' element={
                 <React.Suspense fallback={<Preloader />}>
                   <News />
