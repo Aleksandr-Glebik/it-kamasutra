@@ -68,7 +68,7 @@ const Users: React.FC<PropsType> = (props) => {
         }
 
         navigate({
-            pathname: '/users',
+            pathname: '/developers',
             search: queryString.stringify(query)
         })
 
