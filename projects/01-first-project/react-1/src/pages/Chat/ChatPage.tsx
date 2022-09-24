@@ -32,7 +32,6 @@ const Chat: React.FC = () => {
 }
 
 const Messages: React.FC = () => {
-
     const [messages, setMessages] = useState<ChatMessageType[]>([])
 
     useEffect( () => {
@@ -51,14 +50,26 @@ const Messages: React.FC = () => {
 }
 
 const AddMessagesForm: React.FC = () => {
+    const [message, setMessages] = useState('')
+
+    const sendMessage = () => {
+        if (!message) {
+            return
+        }
+        wsChannel.send(message)
+        setMessages('')
+    }
+
     return (
-        // <div style={{maxWidth: '600px'}}>
         <div>
             <div>
-                <TextArea placeholder={'write messages'} ></TextArea>
+                <TextArea placeholder={'write messages'}
+                          onChange={(e) => setMessages(e.currentTarget.value)}
+                          value={message}
+                ></TextArea>
             </div>
             <div>
-                <Button>send</Button>
+                <Button onClick={sendMessage}>send</Button>
             </div>
         </div>
     )
