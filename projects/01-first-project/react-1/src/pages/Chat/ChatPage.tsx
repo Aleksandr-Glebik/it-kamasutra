@@ -1,13 +1,18 @@
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from 'antd'
 import { Input } from 'antd'
 
 const { TextArea } = Input
 
-// type PropsType = {
+const wsChannel = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
 
-// }
+export type ChatMessageType =  {
+    message: string
+    photo: string
+    userId: number
+    userName: string
+}
 
 const ChatPage: React.FC = () => {
     return (
@@ -18,9 +23,6 @@ const ChatPage: React.FC = () => {
 }
 
 const Chat: React.FC = () => {
-
-    
-
     return (
         <div>
             <Messages />
@@ -30,12 +32,20 @@ const Chat: React.FC = () => {
 }
 
 const Messages: React.FC = () => {
-    const messages = [1, 2, 3, 4]
+
+    const [messages, setMessages] = useState<ChatMessageType[]>([])
+
+    useEffect( () => {
+        wsChannel.addEventListener('message', (event: MessageEvent) => {
+            let newMessages = JSON.parse(event.data)
+            // setMessages([...messages, ...newMessages])
+            setMessages((prevMessages) => [...prevMessages, ...newMessages])
+        })
+    }, [])
+
     return (
         <div style={{height: '400px', overflowY: 'auto'}}>
-            {messages.map( (m: any) => <Message />)}
-            {messages.map( (m: any) => <Message />)}
-            {messages.map( (m: any) => <Message />)}
+            {messages.map( (m, index) => <Message key={index} message={m}/>)}
         </div>
     )
 }
@@ -54,18 +64,13 @@ const AddMessagesForm: React.FC = () => {
     )
 }
 
-const Message: React.FC = () => {
-    const message = {
-        url: 'https://via.placeholder.com/50',
-        author: 'Sasha',
-        text: 'Hello friends'
-    }
+const Message: React.FC<{message: ChatMessageType}> = ({message}) => {
     return (
         <div>
-            <img src={message.url}/>
-            <b>{message.author}</b>
+            <img src={message.photo} style={{width: '45px'}}/>
+            <b>{message.userName}</b>
             <br/>
-            {message.text}
+            {message.message}
             <hr />
         </div>
     )
