@@ -10,16 +10,17 @@ import Preloader from './components/Common/Preloader/Preloader.tsx'
 import {AppStateType} from './redux/redux-store.tsx'
 import  Header  from './components/Header/Header.tsx'
 
-import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons'
+import { LaptopOutlined, NotificationOutlined, UserOutlined, WechatOutlined } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { Layout, Menu } from 'antd'
 const {  Content, Footer, Sider } = Layout
 
 const ProfileContainer = React.lazy( () => import('./components/Profile/ProfileContainer.tsx'))
 const DialogsContainer = React.lazy( () => import('./components/Dialogs/DialogsContainer.tsx'))
-const News = React.lazy( () => import('./components/News/News.tsx'))
-const Music = React.lazy( () => import('./components/Music/Music.tsx'))
-const Setting = React.lazy( () => import('./components/Setting/Setting.tsx'))
+// const News = React.lazy( () => import('./components/News/News.tsx'))
+// const Music = React.lazy( () => import('./components/Music/Music.tsx'))
+// const Setting = React.lazy( () => import('./components/Setting/Setting.tsx'))
+const ChatPage = React.lazy( () => import('./pages/Chat/ChatPage.tsx'))
 
 type MapPropsType = ReturnType<typeof mapStateToProps>
 type DispatchPropsType = {
@@ -41,6 +42,11 @@ export const menuItems = [
     key: 'Developers',
     icon: <LaptopOutlined />,
     label: <Link to="/developers">Developers</Link>,
+  },
+  {
+    key: 'Chat',
+    icon: <WechatOutlined />,
+    label: <Link to="/chat">Chat</Link>,
   },
 ]
 
@@ -91,7 +97,12 @@ return (
                 </React.Suspense>
               } />
               <Route path='/developers/*' element={<UsersPage pageTitle={'Samurai'} />} />
-              <Route path='/news/*' element={
+              <Route path='/chat/*' element={
+                <React.Suspense fallback={<Preloader />}>
+                  <ChatPage />
+                </React.Suspense>
+              } />
+              {/* <Route path='/news/*' element={
                 <React.Suspense fallback={<Preloader />}>
                   <News />
                 </React.Suspense>
@@ -105,7 +116,7 @@ return (
                 <React.Suspense fallback={<Preloader />}>
                   <Setting />
                 </React.Suspense>
-              } />
+              } /> */}
               <Route path='/login/*' element={<LoginPage />} />
           </Routes>
         </Content>
