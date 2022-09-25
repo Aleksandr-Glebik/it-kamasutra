@@ -1,25 +1,52 @@
-
-
-
-let subscribers = [] as Array<subscriberType>
+let subscribers = {
+    'messages-received': [] as MessagesReceivedSubscriberType[],
+    'status-changed': [] as StatusChangedSubscriberType[]
+}
 
 let ws: WebSocket | null = null
 
+type EventNamesType = 'messages-received' | 'status-changed'
+export type StatusType = 'pending' | 'ready' | 'error'
+
 const closeHandler = () => {
+    notifySubscribersAboutStatus('pending')
     setTimeout(createWSChannel, 3000)
 }
 
 const messageHandler = (event: MessageEvent) => {
     let newMessages = JSON.parse(event.data)
-    subscribers.forEach( s => s(newMessages))
+    subscribers['messages-received'].forEach( s => s(newMessages))
+}
+
+const openHandler = () => {
+    notifySubscribersAboutStatus('ready')
+}
+
+const errorHandler = () => {
+    notifySubscribersAboutStatus('error')
+    console.log('REFRESH PAGE !');
+}
+
+const cleanUp = () => {
+    ws?.removeEventListener('close', closeHandler)
+    ws?.removeEventListener('message', messageHandler)
+    ws?.removeEventListener('open', openHandler)
+    ws?.removeEventListener('error', errorHandler)
+}
+
+const notifySubscribersAboutStatus = (status: StatusType) => {
+    subscribers['status-changed'].forEach( s => s(status))
 }
 
 function createWSChannel() {
-    ws?.removeEventListener('close', closeHandler)
+    cleanUp()
     ws?.close()
     ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+    notifySubscribersAboutStatus('pending')
     ws.addEventListener('close', closeHandler)
     ws.addEventListener('message', messageHandler)
+    ws.addEventListener('open', openHandler)
+    ws.addEventListener('error', errorHandler)
 }
 
 const chatAPI = {
@@ -27,19 +54,22 @@ const chatAPI = {
         createWSChannel()
     },
     stop() {
-        subscribers = []
-        ws?.removeEventListener('close', closeHandler)
-        ws?.removeEventListener('message', messageHandler)
+        subscribers['messages-received'] = []
+        subscribers['status-changed'] = []
+        cleanUp()
         ws?.close()
     },
-    subscribe(callback: subscriberType) {
-        subscribers.push(callback)
+    subscribe(eventName: EventNamesType, callback: MessagesReceivedSubscriberType | StatusChangedSubscriberType) {
+        // @ts-ignores
+        subscribers[eventName].push(callback)
         return () => {
-            subscribers = subscribers.filter(s => s !== callback)
+            // @ts-ignores
+            subscribers[eventName] = subscribers[eventName].filter(s => s !== callback)
         }
     },
-    unsubscribe(callback: subscriberType) {
-        subscribers = subscribers.filter(s => s !== callback)
+    unsubscribe(eventName: EventNamesType, callback: MessagesReceivedSubscriberType | StatusChangedSubscriberType) {
+        // @ts-ignores
+        subscribers[eventName] = subscribers[eventName].filter(s => s !== callback)
     },
     sendMessage(message: string) {
         ws?.send(message)
@@ -48,7 +78,8 @@ const chatAPI = {
 
 export default chatAPI
 
-type subscriberType = (messages: ChatMessageType[]) => void
+type MessagesReceivedSubscriberType = (messages: ChatMessageType[]) => void
+type StatusChangedSubscriberType = (status: StatusType) => void
 
 export type ChatMessageType =  {
     message: string
