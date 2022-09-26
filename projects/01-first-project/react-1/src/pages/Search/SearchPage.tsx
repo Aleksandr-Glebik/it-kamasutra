@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { Button, Input, List, Card } from 'antd'
 import s from './SearchPage.module.css'
+import axios from "axios"
+
+//https://api.github.com/search/users?q=it-kamasutra
 
 const SearchPage: React.FC = () => {
     return (
@@ -10,18 +13,36 @@ const SearchPage: React.FC = () => {
     )
 }
 
+type SearchUserType = {
+    login: string
+    id: number
+}
+
+type SearchResultType = {
+    items: SearchUserType[]
+}
+
 const Searcher: React.FC = () => {
 
-    const data = ['Sasha', 'Pasha']
-    const [selectedUser, setSelectedUser] = useState<string | null>(null)
+    const [selectedUser, setSelectedUser] = useState<SearchUserType | null>(null)
+    const [users, setUsers] = useState<SearchUserType[]>([])
 
     useEffect( () => {
-        console.log('useeffect');
+        console.log('sync tab title')
 
         if (selectedUser) {
-            document.title = selectedUser
+            document.title = selectedUser.login
         }
     }, [selectedUser])
+
+    useEffect( () => {
+        console.log('sync users')
+        axios
+            .get<SearchResultType>('https://api.github.com/search/users?q=it-kamasutra')
+            .then(res => {
+                setUsers(res.data.items)
+            })
+    }, [])
 
     return (
         <div className={s.container}>
@@ -31,8 +52,9 @@ const Searcher: React.FC = () => {
                 <List
                     size="small"
                     bordered
-                    dataSource={data}
+                    dataSource={users}
                     renderItem={item => <List.Item
+                        key={item.id}
                         className={selectedUser === item
                             ? s.selected
                             : ''
@@ -41,7 +63,7 @@ const Searcher: React.FC = () => {
                             setSelectedUser(item)
                             // document.title = item
                         }}
-                    >{item}</List.Item>}
+                    >{item.login}</List.Item>}
                 />
             </div>
             <div className="site-card-border-less-wrapper">
