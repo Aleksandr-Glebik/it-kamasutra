@@ -4,10 +4,12 @@ import { ChatMessageType } from '../api/chat-api.ts'
 import chatAPI from '../api/chat-api.ts'
 import { Dispatch } from 'redux'
 import {StatusType} from '../../src/api/chat-api.ts'
+import {v1} from 'uuid'
 
+type ChatMessageTypeWithId = ChatMessageType & {id: string}
 
 let initialState = {
-    messages: [] as ChatMessageType[],
+    messages: [] as ChatMessageTypeWithId[],
     status: 'pending' as StatusType
 }
 
@@ -16,7 +18,7 @@ const chatReducer = (state = initialState, action: ActionsType): InitialStateTyp
         case 'SN/CHAT/MESSAGES_RECEIVED':
             return {
                 ...state,
-                messages: [...state.messages, ...action.payload.messages]
+                messages: [...state.messages, ...action.payload.messages.map( m => ({ ...m, id: v1() }))].filter( (m, index, arr) => index > (arr.length - 100))
             }
         case 'SN/CHAT/STATUS_CHANGED':
             return {
