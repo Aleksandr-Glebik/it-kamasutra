@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Button } from 'antd'
 import { Input } from 'antd'
 import { ChatMessageType } from '../../api/chat-api.ts'
@@ -32,9 +32,8 @@ const Chat: React.FC = () => {
 
     return (
         <div>
-            {status === 'error'
-              ? <div>Some error occured. Please refresh the page</div>
-              : <>
+            {status === 'error' && <div>Some error occured. Please refresh the page</div>}
+            { <>
                 <Messages />
                 <AddMessagesForm />
               </>
@@ -45,9 +44,30 @@ const Chat: React.FC = () => {
 
 const Messages: React.FC<{}> = ({}) => {
     const messages = useSelector((state: AppStateType) => state.chat.messages)
+    const messagesAnchorRef = useRef<HTMLDivElement>(null)
+
+    const [isAutoScroll, setIsAutoScroll] = useState(true)
+
+    const scrollHandler = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+        const el = e.currentTarget
+        if (Math.abs( (el.scrollHeight - el.scrollTop) - el.clientHeight) < 300 ) {
+            !isAutoScroll && setIsAutoScroll(true)
+        } else {
+            isAutoScroll && setIsAutoScroll(false)
+        }
+    }
+
+
+    useEffect( () => {
+        if(isAutoScroll) {
+            messagesAnchorRef.current?.scrollIntoView({behavior: 'smooth'})
+        }
+    }, [messages])
+
     return (
-        <div style={{height: '400px', overflowY: 'auto'}}>
+        <div style={{height: '400px', overflowY: 'auto'}} onScroll={scrollHandler}>
             {messages.map( (m, index) => <Message key={index} message={m}/>)}
+            <div ref={messagesAnchorRef}></div>
         </div>
     )
 }
