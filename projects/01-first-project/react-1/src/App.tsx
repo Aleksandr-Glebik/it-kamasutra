@@ -10,8 +10,9 @@ import {initializeApp} from './redux/app-reducer.ts'
 import Preloader from './components/Common/Preloader/Preloader.tsx'
 import {AppStateType} from './redux/redux-store.tsx'
 import  Header  from './components/Header/Header.tsx'
+import GamePage from './pages/Game/GamePage.tsx'
 
-import { LaptopOutlined, NotificationOutlined, UserOutlined, WechatOutlined } from '@ant-design/icons'
+import { LaptopOutlined, NotificationOutlined, UserOutlined, WechatOutlined, CarryOutOutlined } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { Layout, Menu } from 'antd'
 const {  Content, Footer, Sider } = Layout
@@ -48,6 +49,11 @@ export const menuItems = [
     key: 'Chat',
     icon: <WechatOutlined />,
     label: <Link to="/chat">Chat</Link>,
+  },
+  {
+    key: 'Game',
+    icon: <CarryOutOutlined />,
+    label: <Link to="/game">Game</Link>,
   },
 ]
 
@@ -103,6 +109,7 @@ return (
                   <ChatPage />
                 </React.Suspense>
               } />
+              <Route path='/game/*' element={<GamePage />} />
               {/* <Route path='/news/*' element={
                 <React.Suspense fallback={<Preloader />}>
                   <News />
