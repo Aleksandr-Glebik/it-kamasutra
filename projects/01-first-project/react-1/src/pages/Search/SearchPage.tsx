@@ -26,29 +26,38 @@ const Searcher: React.FC = () => {
 
     const [selectedUser, setSelectedUser] = useState<SearchUserType | null>(null)
     const [users, setUsers] = useState<SearchUserType[]>([])
+    const [tempSearch, setTempSearch] = useState('it-kamasutra')
+    const [searchTerm, setSearchTerm] = useState('it-kamasutra')
 
     useEffect( () => {
-        console.log('sync tab title')
-
+        // console.log('sync tab title')
         if (selectedUser) {
             document.title = selectedUser.login
         }
     }, [selectedUser])
 
     useEffect( () => {
-        console.log('sync users')
+        // console.log('sync users')
         axios
-            .get<SearchResultType>('https://api.github.com/search/users?q=it-kamasutra')
+            .get<SearchResultType>(`https://api.github.com/search/users?q=${searchTerm}`)
             .then(res => {
                 setUsers(res.data.items)
             })
-    }, [])
+    }, [searchTerm])
 
     return (
         <div className={s.container}>
             <div style={{ width: 200, marginRight: 25 }}>
-                <Input placeholder="Search" />
-                <Button>Find</Button>
+                <Input
+                    placeholder="Search"
+                    value={tempSearch}
+                    onChange={e => setTempSearch(e.currentTarget.value)}
+                />
+                <Button
+                    onClick={() => {
+                        setSearchTerm(tempSearch)
+                    }}
+                >Find</Button>
                 <List
                     size="small"
                     bordered
