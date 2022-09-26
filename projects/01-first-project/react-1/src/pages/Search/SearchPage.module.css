@@ -1,0 +1,6 @@
+.container {
+    display: flex;
+}
+.selected {
+    background-color: lightgray;
+}
