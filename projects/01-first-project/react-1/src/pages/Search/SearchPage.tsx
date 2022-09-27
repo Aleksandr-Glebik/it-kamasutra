@@ -98,13 +98,55 @@ export const UsersList = (props: UserListPropsType) => {
     )
 }
 
+type UserDetailsPropsType = {
+    user: SearchUserType | null
+}
+
+export const UserDetails = (props: UserDetailsPropsType) => {
+
+    const [userDetails, setUserDetails] = useState<UserType | null>(null)
+
+    useEffect( () => {
+        console.log('sync user details')
+        if (!!props.user) {
+            axios
+            .get<UserType>(`https://api.github.com/users/${props.user.login}`)
+            .then(res => {
+                setUserDetails(res.data)
+            })
+        }
+    }, [props.user])
+
+    return (
+        <div className="site-card-border-less-wrapper">
+                { userDetails &&
+                <Card title={userDetails?.login}
+                      bordered={false}
+                      style={{ width: 200 }}
+                      cover={
+                        <Image
+                          width={200}
+                          alt="user-photo"
+                          src={userDetails?.avatar_url}
+                        />
+                      }
+                >
+                    <p>login: {userDetails?.login}</p>
+                    <p>ID: {userDetails?.id}</p>
+                    <p>Followers: {userDetails?.followers}</p>
+                    <p>Public repositories: {userDetails?.public_repos}</p>
+                </Card>}
+            </div>
+    )
+}
+
 const Searcher: React.FC = () => {
 
     const [selectedUser, setSelectedUser] = useState<SearchUserType | null>(null)
     // const [users, setUsers] = useState<SearchUserType[]>([])
     // const [tempSearch, setTempSearch] = useState('it-kamasutra')
     const [searchTerm, setSearchTerm] = useState('it-kamasutra')
-    const [userDetails, setUserDetails] = useState<UserType | null>(null)
+    // const [userDetails, setUserDetails] = useState<UserType | null>(null)
 
     useEffect( () => {
         // console.log('sync tab title')
@@ -122,16 +164,16 @@ const Searcher: React.FC = () => {
     //         })
     // }, [searchTerm])
 
-    useEffect( () => {
-        console.log('sync user details')
-        if (!!selectedUser) {
-            axios
-            .get<UserType>(`https://api.github.com/users/${selectedUser.login}`)
-            .then(res => {
-                setUserDetails(res.data)
-            })
-        }
-    }, [selectedUser])
+    // useEffect( () => {
+    //     console.log('sync user details')
+    //     if (!!selectedUser) {
+    //         axios
+    //         .get<UserType>(`https://api.github.com/users/${selectedUser.login}`)
+    //         .then(res => {
+    //             setUserDetails(res.data)
+    //         })
+    //     }
+    // }, [selectedUser])
 
     return (
         <div className={s.container}>
@@ -165,7 +207,8 @@ const Searcher: React.FC = () => {
                     >{item.login}</List.Item>}
                 /> */}
             </div>
-            <div className="site-card-border-less-wrapper">
+            <UserDetails user={selectedUser}/>
+            {/* <div className="site-card-border-less-wrapper">
                 {userDetails &&
                 <Card title={userDetails?.login}
                       bordered={false}
@@ -183,7 +226,7 @@ const Searcher: React.FC = () => {
                     <p>Followers: {userDetails?.followers}</p>
                     <p>Public repositories: {userDetails?.public_repos}</p>
                 </Card>}
-            </div>
+            </div> */}
         </div>
     )
 }
