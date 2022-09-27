@@ -4,6 +4,7 @@ import s from './SearchPage.module.css'
 import axios from "axios"
 import moment from 'moment'
 import Search from './Search.tsx'
+import UsersList, {SearchUserType} from './UsersList.tsx'
 
 // url search users = https://api.github.com/search/users?q=${it-kamasutra}
 // url search user = https://api.github.com/users/${it-kamasutra}
@@ -16,14 +17,14 @@ const SearchPage: React.FC = () => {
     )
 }
 
-type SearchUserType = {
-    login: string
-    id: number
-}
+// type SearchUserType = {
+//     login: string
+//     id: number
+// }
 
-type SearchResultType = {
-    items: SearchUserType[]
-}
+// type SearchResultType = {
+//     items: SearchUserType[]
+// }
 
 type UserType = {
     login: string
@@ -33,41 +34,41 @@ type UserType = {
     followers: number
 }
 
-type UserListPropsType = {
-    term: string
-    selectedUser: SearchUserType | null
-    onUserSelect: (user: SearchUserType) => void
-}
+// type UserListPropsType = {
+//     term: string
+//     selectedUser: SearchUserType | null
+//     onUserSelect: (user: SearchUserType) => void
+// }
 
-export const UsersList = (props: UserListPropsType) => {
-    const [users, setUsers] = useState<SearchUserType[]>([])
+// export const UsersList = (props: UserListPropsType) => {
+//     const [users, setUsers] = useState<SearchUserType[]>([])
 
-    useEffect( () => {
-        axios
-            .get<SearchResultType>(`https://api.github.com/search/users?q=${props.term}`)
-            .then(res => {
-                setUsers(res.data.items)
-            })
-    }, [props.term])
+//     useEffect( () => {
+//         axios
+//             .get<SearchResultType>(`https://api.github.com/search/users?q=${props.term}`)
+//             .then(res => {
+//                 setUsers(res.data.items)
+//             })
+//     }, [props.term])
 
-    return (
-        <List
-            size="small"
-            bordered
-            dataSource={users}
-            renderItem={item => <List.Item
-                key={item.id}
-                className={props.selectedUser === item
-                    ? s.selected
-                    : ''
-                }
-                onClick={() => {
-                    props.onUserSelect(item)
-                }}
-            >{item.login}</List.Item>}
-        />
-    )
-}
+//     return (
+//         <List
+//             size="small"
+//             bordered
+//             dataSource={users}
+//             renderItem={item => <List.Item
+//                 key={item.id}
+//                 className={props.selectedUser === item
+//                     ? s.selected
+//                     : ''
+//                 }
+//                 onClick={() => {
+//                     props.onUserSelect(item)
+//                 }}
+//             >{item.login}</List.Item>}
+//         />
+//     )
+// }
 
 type TimerPropsType = {
     seconds: number
