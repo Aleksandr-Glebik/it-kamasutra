@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react"
-import { Button, Input, List, Card, Image, Space, TimePicker } from 'antd'
+import { List, Card, Image, Space, TimePicker } from 'antd'
 import s from './SearchPage.module.css'
 import axios from "axios"
 import moment from 'moment'
+import Search from './Search.tsx'
 
 // url search users = https://api.github.com/search/users?q=${it-kamasutra}
 // url search user = https://api.github.com/users/${it-kamasutra}
@@ -30,34 +31,6 @@ type UserType = {
     avatar_url: string
     public_repos: number
     followers: number
-}
-
-type SearchPropsType = {
-    value: string
-    onSubmit: (fixedValue: string) => void
-}
-
-export const Search = (props: SearchPropsType) => {
-    const [tempSearch, setTempSearch] = useState('')
-
-    useEffect(() => {
-        setTempSearch(props.value)
-    }, [props.value])
-
-    return (
-        <>
-        <Input
-            placeholder="Search"
-            value={tempSearch}
-            onChange={e => setTempSearch(e.currentTarget.value)}
-        />
-        <Button
-            onClick={() => {
-                props.onSubmit(tempSearch)
-            }}
-        >Find</Button>
-        </>
-    )
 }
 
 type UserListPropsType = {
@@ -125,7 +98,6 @@ export const Timer = (props: TimerPropsType) => {
 
     return (
         <Space direction="vertical">
-
             <TimePicker value={moment(`00:${seconds}`, 'mm:ss')}
                         disabled
             />
