@@ -14,7 +14,7 @@ const Search: React.FC<SearchPropsType> = (props: SearchPropsType) => {
     }, [props.value])
 
     return (
-        <>
+        <div style={{display: 'flex'}}>
         <Input
             placeholder="Search"
             value={tempSearch}
@@ -25,7 +25,7 @@ const Search: React.FC<SearchPropsType> = (props: SearchPropsType) => {
                 props.onSubmit(tempSearch)
             }}
         >Find</Button>
-        </>
+        </div>
     )
 }
 

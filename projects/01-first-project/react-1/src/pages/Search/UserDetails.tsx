@@ -16,7 +16,7 @@ export type UserDetailsPropsType = {
     user: SearchUserType | null
 }
 
-const startTimerSeconds = 10
+const startTimerSeconds = 30
 
 const UserDetails = (props: UserDetailsPropsType) => {
 
@@ -24,7 +24,6 @@ const UserDetails = (props: UserDetailsPropsType) => {
     const [seconds, setSeconds] = useState(startTimerSeconds)
 
     useEffect( () => {
-        console.log('sync user details')
         if (!!props.user) {
             axios
             .get<UserType>(`https://api.github.com/users/${props.user.login}`)
@@ -44,14 +43,14 @@ const UserDetails = (props: UserDetailsPropsType) => {
     return (
         <div className="site-card-border-less-wrapper">
             { userDetails &&
-            <>
+            <div style={{display: 'flex'}}>
                 <Timer seconds={seconds} onChange={setSeconds} timerKey={userDetails?.id.toString()}/>
                 <Card title={userDetails?.login}
                     bordered={false}
-                    style={{ width: 200 }}
+                    style={{ width: 300, order: -1, marginRight: 20 }}
                     cover={
                     <Image
-                        width={200}
+                        width={300}
                         alt="user-photo"
                         src={userDetails?.avatar_url}
                     />
@@ -62,7 +61,7 @@ const UserDetails = (props: UserDetailsPropsType) => {
                     <p>Followers: {userDetails?.followers}</p>
                     <p>Public repositories: {userDetails?.public_repos}</p>
                 </Card>
-            </>}
+            </div>}
         </div>
     )
 }

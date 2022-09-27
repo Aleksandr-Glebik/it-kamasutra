@@ -24,7 +24,7 @@ const Searcher: React.FC = () => {
 
     return (
         <div className={s.container}>
-            <div style={{ width: 200, marginRight: 25 }}>
+            <div style={{ width: 300, marginRight: 25 }}>
                 <Search value={searchTerm} onSubmit={ (value: string) => {setSearchTerm(value)}}/>
                 <UsersList term={searchTerm} selectedUser={selectedUser} onUserSelect={setSelectedUser}/>
             </div>

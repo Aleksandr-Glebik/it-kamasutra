@@ -31,6 +31,7 @@ const UsersList = (props: UserListPropsType) => {
 
     return (
         <List
+            style={{marginTop: 25}}
             size="small"
             bordered
             dataSource={users}
