@@ -60,10 +60,48 @@ export const Search = (props: SearchPropsType) => {
     )
 }
 
+type UserListPropsType = {
+    term: string
+    selectedUser: SearchUserType | null
+    onUserSelect: (user: SearchUserType) => void
+}
+
+export const UsersList = (props: UserListPropsType) => {
+    const [users, setUsers] = useState<SearchUserType[]>([])
+
+    useEffect( () => {
+        // console.log('sync users')
+        axios
+            .get<SearchResultType>(`https://api.github.com/search/users?q=${props.term}`)
+            .then(res => {
+                setUsers(res.data.items)
+            })
+    }, [props.term])
+
+    return (
+        <List
+            size="small"
+            bordered
+            dataSource={users}
+            renderItem={item => <List.Item
+                key={item.id}
+                className={props.selectedUser === item
+                    ? s.selected
+                    : ''
+                }
+                onClick={() => {
+                    props.onUserSelect(item)
+                    // document.title = item
+                }}
+            >{item.login}</List.Item>}
+        />
+    )
+}
+
 const Searcher: React.FC = () => {
 
     const [selectedUser, setSelectedUser] = useState<SearchUserType | null>(null)
-    const [users, setUsers] = useState<SearchUserType[]>([])
+    // const [users, setUsers] = useState<SearchUserType[]>([])
     // const [tempSearch, setTempSearch] = useState('it-kamasutra')
     const [searchTerm, setSearchTerm] = useState('it-kamasutra')
     const [userDetails, setUserDetails] = useState<UserType | null>(null)
@@ -75,14 +113,14 @@ const Searcher: React.FC = () => {
         }
     }, [selectedUser])
 
-    useEffect( () => {
-        // console.log('sync users')
-        axios
-            .get<SearchResultType>(`https://api.github.com/search/users?q=${searchTerm}`)
-            .then(res => {
-                setUsers(res.data.items)
-            })
-    }, [searchTerm])
+    // useEffect( () => {
+    //     // console.log('sync users')
+    //     axios
+    //         .get<SearchResultType>(`https://api.github.com/search/users?q=${searchTerm}`)
+    //         .then(res => {
+    //             setUsers(res.data.items)
+    //         })
+    // }, [searchTerm])
 
     useEffect( () => {
         console.log('sync user details')
@@ -109,7 +147,8 @@ const Searcher: React.FC = () => {
                     }}
                 >Find</Button> */}
                 <Search value={searchTerm} onSubmit={ (value: string) => {setSearchTerm(value)}}/>
-                <List
+                <UsersList term={searchTerm} selectedUser={selectedUser} onUserSelect={setSelectedUser}/>
+                {/* <List
                     size="small"
                     bordered
                     dataSource={users}
@@ -124,7 +163,7 @@ const Searcher: React.FC = () => {
                             // document.title = item
                         }}
                     >{item.login}</List.Item>}
-                />
+                /> */}
             </div>
             <div className="site-card-border-less-wrapper">
                 {userDetails &&
