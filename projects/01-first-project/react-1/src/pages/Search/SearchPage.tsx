@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react"
-import { Button, Input, List, Card, Image } from 'antd'
+import { Button, Input, List, Card, Image, Space, TimePicker } from 'antd'
 import s from './SearchPage.module.css'
 import axios from "axios"
+import moment from 'moment'
 
 // url search users = https://api.github.com/search/users?q=${it-kamasutra}
 // url search user = https://api.github.com/users/${it-kamasutra}
@@ -95,13 +96,47 @@ export const UsersList = (props: UserListPropsType) => {
     )
 }
 
+type TimerPropsType = {
+    seconds: number
+    onChange: (actualSeconds: number) => void
+}
+
+export const Timer = (props: TimerPropsType) => {
+    const [seconds, setSeconds] = useState(props.seconds)
+
+    useEffect( () => {
+        setSeconds(props.seconds)
+    }, [props.seconds])
+
+    useEffect(() => {
+        props.onChange(seconds)
+    }, [seconds])
+
+    useEffect( () => {
+        setInterval(() => {
+            setSeconds( prev => prev - 1)
+        }, 2000)
+    }, [])
+
+    return (
+        <Space direction="vertical">
+            <TimePicker value={moment(`00:${seconds}`, 'mm:ss')}
+                        disabled
+            />
+        </Space>
+    )
+}
+
 type UserDetailsPropsType = {
     user: SearchUserType | null
 }
 
+const startTimerSeconds = 10
+
 export const UserDetails = (props: UserDetailsPropsType) => {
 
     const [userDetails, setUserDetails] = useState<UserType | null>(null)
+    const [seconds, setSeconds] = useState(startTimerSeconds)
 
     useEffect( () => {
         console.log('sync user details')
@@ -110,14 +145,23 @@ export const UserDetails = (props: UserDetailsPropsType) => {
             .get<UserType>(`https://api.github.com/users/${props.user.login}`)
             .then(res => {
                 setUserDetails(res.data)
+                setSeconds(startTimerSeconds)
             })
         }
     }, [props.user])
 
+    useEffect(() => {
+        if (seconds < 1) {
+            setUserDetails(null)
+        }
+    }, [seconds])
+
     return (
         <div className="site-card-border-less-wrapper">
                 { userDetails &&
-                <Card title={userDetails?.login}
+                <>
+                    <Timer seconds={seconds} onChange={setSeconds}/>
+                    <Card title={userDetails?.login}
                       bordered={false}
                       style={{ width: 200 }}
                       cover={
@@ -127,12 +171,13 @@ export const UserDetails = (props: UserDetailsPropsType) => {
                           src={userDetails?.avatar_url}
                         />
                       }
-                >
-                    <p>login: {userDetails?.login}</p>
-                    <p>ID: {userDetails?.id}</p>
-                    <p>Followers: {userDetails?.followers}</p>
-                    <p>Public repositories: {userDetails?.public_repos}</p>
-                </Card>}
+                    >
+                        <p>login: {userDetails?.login}</p>
+                        <p>ID: {userDetails?.id}</p>
+                        <p>Followers: {userDetails?.followers}</p>
+                        <p>Public repositories: {userDetails?.public_repos}</p>
+                    </Card>
+                </>}
             </div>
     )
 }
@@ -153,7 +198,9 @@ const Searcher: React.FC = () => {
                 <Search value={searchTerm} onSubmit={ (value: string) => {setSearchTerm(value)}}/>
                 <UsersList term={searchTerm} selectedUser={selectedUser} onUserSelect={setSelectedUser}/>
             </div>
-            <UserDetails user={selectedUser}/>
+            <div>
+                <UserDetails user={selectedUser}/>
+            </div>
         </div>
     )
 }
