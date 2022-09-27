@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react"
-import { List, Card, Image, Space, TimePicker } from 'antd'
+import { Card, Image } from 'antd'
 import s from './SearchPage.module.css'
 import axios from "axios"
-import moment from 'moment'
 import Search from './Search.tsx'
 import UsersList, {SearchUserType} from './UsersList.tsx'
+import Timer from './Timer.tsx'
 
 // url search users = https://api.github.com/search/users?q=${it-kamasutra}
 // url search user = https://api.github.com/users/${it-kamasutra}
@@ -17,93 +17,12 @@ const SearchPage: React.FC = () => {
     )
 }
 
-// type SearchUserType = {
-//     login: string
-//     id: number
-// }
-
-// type SearchResultType = {
-//     items: SearchUserType[]
-// }
-
 type UserType = {
     login: string
     id: number
     avatar_url: string
     public_repos: number
     followers: number
-}
-
-// type UserListPropsType = {
-//     term: string
-//     selectedUser: SearchUserType | null
-//     onUserSelect: (user: SearchUserType) => void
-// }
-
-// export const UsersList = (props: UserListPropsType) => {
-//     const [users, setUsers] = useState<SearchUserType[]>([])
-
-//     useEffect( () => {
-//         axios
-//             .get<SearchResultType>(`https://api.github.com/search/users?q=${props.term}`)
-//             .then(res => {
-//                 setUsers(res.data.items)
-//             })
-//     }, [props.term])
-
-//     return (
-//         <List
-//             size="small"
-//             bordered
-//             dataSource={users}
-//             renderItem={item => <List.Item
-//                 key={item.id}
-//                 className={props.selectedUser === item
-//                     ? s.selected
-//                     : ''
-//                 }
-//                 onClick={() => {
-//                     props.onUserSelect(item)
-//                 }}
-//             >{item.login}</List.Item>}
-//         />
-//     )
-// }
-
-type TimerPropsType = {
-    seconds: number
-    onChange: (actualSeconds: number) => void
-    timerKey: string
-}
-
-export const Timer = (props: TimerPropsType) => {
-    const [seconds, setSeconds] = useState(props.seconds)
-
-    useEffect( () => {
-        setSeconds(props.seconds)
-    }, [props.seconds])
-
-    useEffect(() => {
-        props.onChange(seconds)
-    }, [seconds])
-
-    useEffect( () => {
-        const intervalId = setInterval(() => {
-            setSeconds( prev => prev - 1)
-        }, 1000)
-
-        return () => {
-            clearInterval(intervalId)
-        }
-    }, [props.timerKey])
-
-    return (
-        <Space direction="vertical">
-            <TimePicker value={moment(`00:${seconds}`, 'mm:ss')}
-                        disabled
-            />
-        </Space>
-    )
 }
 
 type UserDetailsPropsType = {
