@@ -31,11 +31,40 @@ type UserType = {
     followers: number
 }
 
+type SearchPropsType = {
+    value: string
+    onSubmit: (fixedValue: string) => void
+}
+
+export const Search = (props: SearchPropsType) => {
+
+    const [tempSearch, setTempSearch] = useState('')
+
+    useEffect(() => {
+        setTempSearch(props.value)
+    }, [props.value])
+
+    return (
+        <>
+        <Input
+            placeholder="Search"
+            value={tempSearch}
+            onChange={e => setTempSearch(e.currentTarget.value)}
+        />
+        <Button
+            onClick={() => {
+                props.onSubmit(tempSearch)
+            }}
+        >Find</Button>
+        </>
+    )
+}
+
 const Searcher: React.FC = () => {
 
     const [selectedUser, setSelectedUser] = useState<SearchUserType | null>(null)
     const [users, setUsers] = useState<SearchUserType[]>([])
-    const [tempSearch, setTempSearch] = useState('it-kamasutra')
+    // const [tempSearch, setTempSearch] = useState('it-kamasutra')
     const [searchTerm, setSearchTerm] = useState('it-kamasutra')
     const [userDetails, setUserDetails] = useState<UserType | null>(null)
 
@@ -69,7 +98,7 @@ const Searcher: React.FC = () => {
     return (
         <div className={s.container}>
             <div style={{ width: 200, marginRight: 25 }}>
-                <Input
+                {/* <Input
                     placeholder="Search"
                     value={tempSearch}
                     onChange={e => setTempSearch(e.currentTarget.value)}
@@ -78,7 +107,8 @@ const Searcher: React.FC = () => {
                     onClick={() => {
                         setSearchTerm(tempSearch)
                     }}
-                >Find</Button>
+                >Find</Button> */}
+                <Search value={searchTerm} onSubmit={ (value: string) => {setSearchTerm(value)}}/>
                 <List
                     size="small"
                     bordered
