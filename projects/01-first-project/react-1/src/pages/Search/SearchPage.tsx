@@ -99,6 +99,7 @@ export const UsersList = (props: UserListPropsType) => {
 type TimerPropsType = {
     seconds: number
     onChange: (actualSeconds: number) => void
+    timerKey: string
 }
 
 export const Timer = (props: TimerPropsType) => {
@@ -113,13 +114,18 @@ export const Timer = (props: TimerPropsType) => {
     }, [seconds])
 
     useEffect( () => {
-        setInterval(() => {
+        const intervalId = setInterval(() => {
             setSeconds( prev => prev - 1)
-        }, 2000)
-    }, [])
+        }, 1000)
+
+        return () => {
+            clearInterval(intervalId)
+        }
+    }, [props.timerKey])
 
     return (
         <Space direction="vertical">
+
             <TimePicker value={moment(`00:${seconds}`, 'mm:ss')}
                         disabled
             />
@@ -144,8 +150,8 @@ export const UserDetails = (props: UserDetailsPropsType) => {
             axios
             .get<UserType>(`https://api.github.com/users/${props.user.login}`)
             .then(res => {
-                setUserDetails(res.data)
                 setSeconds(startTimerSeconds)
+                setUserDetails(res.data)
             })
         }
     }, [props.user])
@@ -160,7 +166,7 @@ export const UserDetails = (props: UserDetailsPropsType) => {
         <div className="site-card-border-less-wrapper">
                 { userDetails &&
                 <>
-                    <Timer seconds={seconds} onChange={setSeconds}/>
+                    <Timer seconds={seconds} onChange={setSeconds} timerKey={userDetails?.id.toString()}/>
                     <Card title={userDetails?.login}
                       bordered={false}
                       style={{ width: 200 }}
