@@ -1,6 +1,7 @@
-import { Button, Card, Image } from "antd"
+import { Button } from "antd"
 import React, { useState } from "react"
 import DrawerRules from './DrawerRules.tsx'
+import PersonCard from './PersonCard.tsx'
 
 const GamePage: React.FC = () => {
     return (
@@ -9,6 +10,8 @@ const GamePage: React.FC = () => {
         </div>
     )
 }
+
+const initialImageSrc = 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png'
 
 const Game: React.FC = () => {
     console.log('component rendering');
@@ -20,7 +23,7 @@ const Game: React.FC = () => {
 
     return (
         <div style={{width: 900, display: 'flex', justifyContent: 'space-between'}}>
-            <Card title={'Иван Иванович'}
+            {/* <Card title={'Иван Иванович'}
                   hoverable
                   style={{ width: 250 }}
                   cover={
@@ -30,13 +33,10 @@ const Game: React.FC = () => {
                   }
             >
                 <h2>Счет: {counter.c1}</h2>
-                <Button onClick={ () => setCounter(actual => {
-                    return {
-                        ...actual, c1: actual.c1 + 1
-                    }
-                })}>+</Button>
-            </Card>
-            <Card title={'Петр Петрович'}
+            </Card> */}
+            <PersonCard cardTitle={'str1'} imageSrc={initialImageSrc} count={counter.c1} />
+            <PersonCard cardTitle={'str2'} imageSrc={initialImageSrc} count={counter.c2} />
+            {/* <Card title={'Петр Петрович'}
                   hoverable
                   style={{ width: 250 }}
                   cover={
@@ -46,12 +46,7 @@ const Game: React.FC = () => {
                   }
             >
                 <h2>Счет: {counter.c2}</h2>
-                <Button onClick={ () => setCounter(actual => {
-                    return {
-                        ...actual, c2: actual.c2 + 1
-                    }
-                })}>+</Button>
-            </Card>
+            </Card> */}
             <div>
                 <Button onClick={ () => setCounter(actual => {
                         return {
@@ -68,6 +63,16 @@ const Game: React.FC = () => {
                         }
                 })}>reset game</Button>
                 <DrawerRules />
+                <Button onClick={ () => setCounter(actual => {
+                    return {
+                        ...actual, c1: actual.c1 + 1
+                    }
+                })}>+ очко 1 игроку</Button>
+                <Button onClick={ () => setCounter(actual => {
+                    return {
+                        ...actual, c2: actual.c2 + 1
+                    }
+                })}>+ очко 2 игроку</Button>
             </div>
         </div>
     )
