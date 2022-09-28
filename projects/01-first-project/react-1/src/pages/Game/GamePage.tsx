@@ -1,5 +1,6 @@
 import { Button, Card, Image } from "antd"
 import React, { useState } from "react"
+import DrawerRules from './DrawerRules.tsx'
 
 const GamePage: React.FC = () => {
     return (
@@ -66,6 +67,7 @@ const Game: React.FC = () => {
                             c2: 0
                         }
                 })}>reset game</Button>
+                <DrawerRules />
             </div>
         </div>
     )
