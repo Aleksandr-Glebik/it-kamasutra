@@ -82,6 +82,7 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {initializeApp})(App)
 
-// save result of - samurai path one !!!
+
+//result samurai-1.0 path
 
 
