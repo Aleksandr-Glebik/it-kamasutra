@@ -3,6 +3,7 @@ import { Button } from "antd"
 import DrawerRules from './DrawerRules.tsx'
 import PersonCard from './PersonCard.tsx'
 import GameTimer from './GameTimer.tsx'
+import CastomFormCard from './CastomFormCard.tsx'
 import styles from './GamePage.module.css'
 
 const GamePage: React.FC = () => {
@@ -21,6 +22,10 @@ const Game: React.FC = () => {
     let [setupSectionForm, setSetupSectionForm] = useState(false)
     let [setupSectionButton, setSetupSectionButton] = useState(false)
 
+    let [nameOne, setNameOne] = useState('Name 1')
+    let [nameTwo, setNameTwo] = useState('Name 2')
+
+
     let [counter, setCounter] = useState({
         c1: 0,
         c2: 0
@@ -29,9 +34,9 @@ const Game: React.FC = () => {
     return (
         <div className={styles.container}>
             <div className={styles.gameSection}>
-                <PersonCard cardTitle={'str1'} imageSrc={initialImageSrc} count={counter.c1} />
+                <PersonCard cardTitle={nameOne} imageSrc={initialImageSrc} count={counter.c1} />
                 <GameTimer className={styles.gameTimer}/>
-                <PersonCard cardTitle={'str2'} imageSrc={initialImageSrc} count={counter.c2} />
+                <PersonCard cardTitle={nameTwo} imageSrc={initialImageSrc} count={counter.c2} />
             </div>
             <div className={styles.setupSection}>
                 <div className={styles.setupSectionNav}>
@@ -44,7 +49,8 @@ const Game: React.FC = () => {
                     <DrawerRules />
                 </div>
                 {setupSectionForm &&  <div className={styles.setupSectionForm}>
-                    Секция где будут импуты для установки имен и фото
+                    <CastomFormCard cardTitle={'Данные Первого игрока'} name={nameOne} onSubmit={setNameOne} />
+                    <CastomFormCard cardTitle={'Данные Второго игрока'} name={nameTwo} onSubmit={setNameTwo} />
                 </div>}
                 {setupSectionButton && <div className={styles.setupSectionButton}>
                     <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
@@ -77,6 +83,8 @@ const Game: React.FC = () => {
                             </div>
                         </div>
                         <div style={{justifySelf: 'flex-end',     alignSelf: 'center', padding: 20}}>
+                            <Button>Старт</Button>
+                            <Button>Остановить время</Button>
                             <Button onClick={ () => setCounter(actual => {
                                 return {
                                     ...actual,
@@ -91,7 +99,7 @@ const Game: React.FC = () => {
                                         c2: 0
                                     }
                             })}>сбросить счет</Button>
-                            <Button>Остановить время</Button>
+
                         </div>
                     </div>
                     <div>
