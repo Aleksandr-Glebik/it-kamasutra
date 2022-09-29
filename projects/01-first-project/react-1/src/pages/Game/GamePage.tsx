@@ -47,33 +47,54 @@ const Game: React.FC = () => {
                     Секция где будут импуты для установки имен и фото
                 </div>}
                 {setupSectionButton && <div className={styles.setupSectionButton}>
-                    <div>
-                        <Button onClick={ () => setCounter(actual => {
-                        return {
-                            ...actual, c1: actual.c1 + 1
-                        }
-                        })}>+ очко 1 игроку</Button>
-                        <Button onClick={ () => setCounter(actual => {
-                            return {
-                                ...actual, c2: actual.c2 + 1
-                            }
-                        })}>+ очко 2 игроку</Button>
-                    </div>
-                    <div>
-                        <Button onClick={ () => setCounter(actual => {
-                            return {
-                                ...actual,
-                                c1: actual.c1 - 1,
-                                c2: actual.c2 - 1
-                            }
-                        })}>-</Button>
-                        <Button onClick={ () => setCounter(actual => {
+                    <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+                        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                            <div style={{border: '1px solid black', padding: 20}}>
+                                <p>Управление очками Первого Игрока</p>
+                                <Button onClick={ () => setCounter(actual => {
+                                return {
+                                    ...actual, c1: actual.c1 + 1
+                                }
+                                })}>+ очко 1 игроку</Button>
+                                <Button onClick={ () => setCounter(actual => {
+                                return {
+                                    ...actual, c1: actual.c1 - 1
+                                }
+                                })}>- очко 1 игроку</Button>
+                            </div>
+                            <div style={{border: '1px solid black', padding: 20}}>
+                                <p>Управление очками Второго Игрока</p>
+                                <Button onClick={ () => setCounter(actual => {
+                                    return {
+                                        ...actual, c2: actual.c2 + 1
+                                    }
+                                })}>+ очко 2 игроку</Button>
+                                <Button onClick={ () => setCounter(actual => {
+                                    return {
+                                        ...actual, c2: actual.c2 - 1
+                                    }
+                                })}>- очко 2 игроку</Button>
+                            </div>
+                        </div>
+                        <div style={{justifySelf: 'flex-end',     alignSelf: 'center', padding: 20}}>
+                            <Button onClick={ () => setCounter(actual => {
                                 return {
                                     ...actual,
-                                    c1: 0,
-                                    c2: 0
+                                    c1: actual.c1 - 1,
+                                    c2: actual.c2 - 1
                                 }
-                        })}>reset game</Button>
+                            })}>- штрафное очко всем игрокам</Button>
+                            <Button onClick={ () => setCounter(actual => {
+                                    return {
+                                        ...actual,
+                                        c1: 0,
+                                        c2: 0
+                                    }
+                            })}>сбросить счет</Button>
+                            <Button>Остановить время</Button>
+                        </div>
+                    </div>
+                    <div>
                     </div>
                 </div>}
             </div>
