@@ -20,8 +20,6 @@ const imageSrcMan = 'https://source.unsplash.com/user/timbog80/4uojMEdcwI8/1920x
 const imageSrcWoman = 'https://source.unsplash.com/user/denysnevozhai/z0nVqfrOqWA/1920x1280'
 
 const Game: React.FC = () => {
-    console.log('component rendering');
-
     let [setupSectionForm, setSetupSectionForm] = useState(false)
     let [setupSectionButton, setSetupSectionButton] = useState(false)
 
@@ -64,11 +62,37 @@ const Game: React.FC = () => {
         c2: 0
     })
 
+    const [time, setTime] = useState({
+        minutes: 5,
+        seconds: 0
+    })
+
+    const [play, setPlay] = useState(false)
+
+    const resetCountAndTime = () => {
+        setTime({
+            minutes: 5,
+            seconds: 0
+        })
+        setCounter(actual => {
+            return {
+                ...actual,
+                c1: 0,
+                c2: 0
+            }
+        })
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.gameSection}>
                 <PersonCard cardTitle={nameOne} imageSrc={imageSrcOne} count={counter.c1} gender={genderOne}/>
-                <GameTimer className={styles.gameTimer}/>
+                <GameTimer
+                  className={styles.gameTimer}
+                  time={time}
+                  onChangeTime={setTime}
+                  play={play}
+                />
                 <PersonCard cardTitle={nameTwo} imageSrc={imageSrcTwo} count={counter.c2} gender={genderTwo}/>
             </div>
             <div className={styles.setupSection}>
@@ -86,8 +110,8 @@ const Game: React.FC = () => {
                     <CastomFormCard cardTitle={'Данные Второго игрока'} name={nameTwo} onSubmit={handleSubmitTwo} gender={genderTwo} />
                 </div>}
                 {setupSectionButton && <div className={styles.setupSectionButton}>
-                    <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
-                        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
+                        <div style={{display: 'flex', justifyContent: 'space-around'}}>
                             <div className="site-card-border-less-wrapper">
                             <Card title="Первый Игрок" bordered={false} style={{ width: 300 }}>
                                 <Button type="primary" onClick={ () => setCounter(actual => {
@@ -129,30 +153,40 @@ const Game: React.FC = () => {
                         </div>
                         <div style={{justifySelf: 'flex-end', alignSelf: 'center', padding: 20}}>
                             <Card title="Управление игрой" bordered={false} style={{ width: 300 }}>
-                            <Button>
-                                <PlayCircleOutlined style={{fontSize: '20px'}} />
-                            </Button>
-                            <Button >
-                                <PauseCircleOutlined style={{fontSize: '20px'}} />
-                            </Button>
-                            <Button onClick={ () => setCounter(actual => {
+                                <div style={{ display:'flex', justifyContent: 'space-between'}}>
+                                    <p style={{ display:'inline-block' }}>Начать игру</p>
+                                    <Button
+                                    onClick={() => setPlay(true)}
+                                    >
+                                    <PlayCircleOutlined style={{fontSize: '20px'}} />
+                                    </Button>
+                                </div>
+                                <div style={{ display:'flex', justifyContent: 'space-between'}}>
+                                    <p style={{ display:'inline-block' }}>Пауза</p>
+                                    <Button
+                                        onClick={() => setPlay(false)}
+                                    >
+                                        <PauseCircleOutlined style={{fontSize: '20px'}} />
+                                    </Button>
+                                </div>
+                                <div style={{ display:'flex', justifyContent: 'space-between'}}>
+                                <p style={{ display:'inline-block' }}>Штрафной балл каждому</p>
+                                <Button onClick={ () => setCounter(actual => {
                                 return {
                                     ...actual,
                                     c1: actual.c1 - 1,
                                     c2: actual.c2 - 1
                                 }
-                            })}>
-                                <MinusOutlined style={{fontSize: '20px'}} />
-                            </Button>
-                            <Button onClick={ () => setCounter(actual => {
-                                    return {
-                                        ...actual,
-                                        c1: 0,
-                                        c2: 0
-                                    }
-                            })}>
-                                <RedoOutlined style={{fontSize: '20px'}} />
-                            </Button>
+                                })}>
+                                    <MinusOutlined style={{fontSize: '20px'}} />
+                                </Button>
+                                </div>
+                                <div style={{ display:'flex', justifyContent: 'space-between', marginTop: '20px'}}>
+                                <Button onClick={ () => resetCountAndTime()}>
+                                    <RedoOutlined style={{fontSize: '20px'}} />
+                                </Button>
+                                <p style={{ display:'inline-block' }}>Начать игру заново</p>
+                                </div>
                             </Card>
                         </div>
                     </div>

@@ -35,11 +35,6 @@ const CastomFormCard: React.FC<CastomFormCardPropsType> = (props: CastomFormCard
                     </Form.Item>
                     <Button
                       onClick={() => {
-                        console.log({
-                            name: name,
-                            gender: gender
-                        });
-
                         props.onSubmit({
                             name: name,
                             gender: gender
