@@ -15,7 +15,7 @@ const DrawerRules: React.FC = () => {
 
     return (
     <>
-        <Button type="primary" onClick={showDrawer}>
+        <Button type="primary" ghost onClick={showDrawer}>
             Правила игры
         </Button>
         <Drawer title="Правила игры" placement="right" onClose={onClose} open={open}>

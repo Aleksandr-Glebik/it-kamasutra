@@ -1,11 +1,11 @@
 import React, { useState } from "react"
-import { Button } from "antd"
+import { Button, Card } from "antd"
 import DrawerRules from './DrawerRules.tsx'
 import PersonCard from './PersonCard.tsx'
 import GameTimer from './GameTimer.tsx'
 import CastomFormCard from './CastomFormCard.tsx'
 import styles from './GamePage.module.css'
-// import { values } from "lodash"
+import {PlusCircleOutlined, MinusCircleOutlined, PlayCircleOutlined, PauseCircleOutlined, MinusOutlined, RedoOutlined } from '@ant-design/icons'
 
 const GamePage: React.FC = () => {
     return (
@@ -25,8 +25,8 @@ const Game: React.FC = () => {
     let [setupSectionForm, setSetupSectionForm] = useState(false)
     let [setupSectionButton, setSetupSectionButton] = useState(false)
 
-    let [nameOne, setNameOne] = useState('Name 1')
-    let [nameTwo, setNameTwo] = useState('Name 2')
+    let [nameOne, setNameOne] = useState('Имя 1 игрока')
+    let [nameTwo, setNameTwo] = useState('Имя 2 игрока')
 
     let [genderOne, setGenderOne] = useState('')
     let [genderTwo, setGenderTwo] = useState('')
@@ -73,7 +73,7 @@ const Game: React.FC = () => {
             </div>
             <div className={styles.setupSection}>
                 <div className={styles.setupSectionNav}>
-                    <Button danger
+                    <Button type="primary"
                             onClick={() => setSetupSectionForm(prev => !prev)}
                     >Настройка</Button>
                     <Button type="default"
@@ -88,51 +88,72 @@ const Game: React.FC = () => {
                 {setupSectionButton && <div className={styles.setupSectionButton}>
                     <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
                         <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                            <div style={{border: '1px solid black', padding: 20}}>
-                                <p>Управление очками Первого Игрока</p>
-                                <Button onClick={ () => setCounter(actual => {
+                            <div className="site-card-border-less-wrapper">
+                            <Card title="Первый Игрок" bordered={false} style={{ width: 300 }}>
+                                <Button type="primary" onClick={ () => setCounter(actual => {
                                 return {
                                     ...actual, c1: actual.c1 + 1
                                 }
-                                })}>+ очко 1 игроку</Button>
-                                <Button onClick={ () => setCounter(actual => {
+                                })}>
+                                    <PlusCircleOutlined style={{fontSize: '20px'}} />
+                                </Button>
+                                <Button danger style={{marginLeft: '20px'}}
+                                  onClick={ () => setCounter(actual => {
                                 return {
                                     ...actual, c1: actual.c1 - 1
                                 }
-                                })}>- очко 1 игроку</Button>
+                                })}>
+                                    <MinusCircleOutlined style={{fontSize: '20px'}} />
+                                </Button>
+                            </Card>
                             </div>
-                            <div style={{border: '1px solid black', padding: 20}}>
-                                <p>Управление очками Второго Игрока</p>
-                                <Button onClick={ () => setCounter(actual => {
-                                    return {
-                                        ...actual, c2: actual.c2 + 1
-                                    }
-                                })}>+ очко 2 игроку</Button>
-                                <Button onClick={ () => setCounter(actual => {
-                                    return {
-                                        ...actual, c2: actual.c2 - 1
-                                    }
-                                })}>- очко 2 игроку</Button>
+                            <div className="site-card-border-less-wrapper">
+                                <Card title="Второй Игрок" bordered={false} style={{ width: 300 }}>
+                                    <Button type="primary" onClick={ () => setCounter(actual => {
+                                        return {
+                                            ...actual, c2: actual.c2 + 1
+                                        }
+                                    })}>
+                                        <PlusCircleOutlined style={{fontSize: '20px'}} />
+                                    </Button>
+                                    <Button danger style={{marginLeft: '20px'}}
+                                     onClick={ () => setCounter(actual => {
+                                        return {
+                                            ...actual, c2: actual.c2 - 1
+                                        }
+                                    })}>
+                                        <MinusCircleOutlined style={{fontSize: '20px'}} />
+                                    </Button>
+                                </Card>
                             </div>
                         </div>
                         <div style={{justifySelf: 'flex-end', alignSelf: 'center', padding: 20}}>
-                            <Button>Старт</Button>
-                            <Button>Остановить время</Button>
+                            <Card title="Управление игрой" bordered={false} style={{ width: 300 }}>
+                            <Button>
+                                <PlayCircleOutlined style={{fontSize: '20px'}} />
+                            </Button>
+                            <Button >
+                                <PauseCircleOutlined style={{fontSize: '20px'}} />
+                            </Button>
                             <Button onClick={ () => setCounter(actual => {
                                 return {
                                     ...actual,
                                     c1: actual.c1 - 1,
                                     c2: actual.c2 - 1
                                 }
-                            })}>- штрафное очко всем игрокам</Button>
+                            })}>
+                                <MinusOutlined style={{fontSize: '20px'}} />
+                            </Button>
                             <Button onClick={ () => setCounter(actual => {
                                     return {
                                         ...actual,
                                         c1: 0,
                                         c2: 0
                                     }
-                            })}>сбросить счет</Button>
-
+                            })}>
+                                <RedoOutlined style={{fontSize: '20px'}} />
+                            </Button>
+                            </Card>
                         </div>
                     </div>
                     <div>
