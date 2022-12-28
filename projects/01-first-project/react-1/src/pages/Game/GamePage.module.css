@@ -32,7 +32,7 @@
 .setupSectionForm {
     display: flex;
     justify-content: space-around;
-    height: 200px;
+    height: 290px;
     background-color: rgb(255, 237, 226);
     padding: 20px;
     border-radius: 10px;
