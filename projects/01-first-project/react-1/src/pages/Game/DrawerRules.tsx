@@ -10,12 +10,12 @@ const DrawerRules: React.FC = () => {
     };
 
     const onClose = () => {
-    setOpen(false);
+        setOpen(false);
     };
 
     return (
     <>
-        <Button type="primary" onClick={showDrawer}>
+        <Button type="primary" ghost onClick={showDrawer}>
             Правила игры
         </Button>
         <Drawer title="Правила игры" placement="right" onClose={onClose} open={open}>

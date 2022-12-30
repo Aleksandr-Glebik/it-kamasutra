@@ -1,7 +1,6 @@
 
 import React, { useEffect, useRef, useState } from 'react'
-import { Button } from 'antd'
-import { Input } from 'antd'
+import { Button, Avatar, Typography, Input, Alert } from 'antd'
 import { ChatMessageType } from '../../api/chat-api.ts'
 import { useDispatch, useSelector } from 'react-redux'
 import { startMessagesListening, stopMessagesListening, sendMessage } from '../../redux/chat-reducer.ts'
@@ -104,14 +103,18 @@ const AddMessagesForm: React.FC = () => {
     )
 }
 
+const { Title } = Typography;
+
 const Message: React.FC<{message: ChatMessageType}> = React.memo(({message}) => {
     return (
-        <div>
-            <img src={message.photo} style={{width: '45px'}}/>
-            <b>{message.userName}</b>
-            <br/>
-            {message.message}
-            <hr />
+        <div style={{width: '50%', margin: '1.5rem 0.5rem', border: '1px solid green', borderRadius: '1rem', padding: '1rem'}}>
+            <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '0.5rem'}}>
+                <Avatar.Group style={{marginRight: '0.5rem'}}>
+                    <Avatar src={message.photo} style={{width: '55px', height: '55px'}} />
+                </Avatar.Group>
+                <Title level={4}>{message.userName}</Title>
+            </div>
+            <Alert message={message.message} type="success" />
         </div>
     )
 })
