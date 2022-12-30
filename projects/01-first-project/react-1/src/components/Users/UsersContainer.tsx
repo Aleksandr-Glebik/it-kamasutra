@@ -15,7 +15,7 @@ const UsersPage: React.FC<UsersPagePropsType> = (props) => {
             <h2>{props.pageTitle}</h2>
             {isFetching ? <Preloader /> : null}
             <Users />
-            </>
+           </>
 }
 
 export default UsersPage

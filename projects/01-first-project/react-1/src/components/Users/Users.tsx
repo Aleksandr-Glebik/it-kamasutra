@@ -60,10 +60,10 @@ const Users: React.FC<PropsType> = (props) => {
         if (!!filter.term) {
             query.term = filter.term
         }
-        if (currentPage != 1) {
+        if (currentPage !== 1) {
             query.page = String(currentPage)
         }
-        if (filter.friend != 'null') {
+        if (filter.friend !== 'null') {
             query.friend = String(filter.friend)
         }
 
@@ -92,6 +92,7 @@ const Users: React.FC<PropsType> = (props) => {
             <UsersSearchForm onFilterChanged={onFilterChanged} />
 
             <Paginator currentPage={currentPage} onPageChanged={onPageChanged} totalUsersCount={totalUsersCount} pageSize={pageSize}/>
+            <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'center', gap: '2rem'}}>
                 {
                     users.map((u) => {
                         return <User user={u}
@@ -101,6 +102,7 @@ const Users: React.FC<PropsType> = (props) => {
                                     key={u.id} />
                     })
                 }
+            </div>
         </div>
     )
 }

@@ -36,11 +36,11 @@ export const menuItems = [
     icon: <UserOutlined />,
     label: <Link to="/profile/24457">My Profile</Link>,
   },
-  {
-    key: 'Messages',
-    icon: <NotificationOutlined />,
-    label: <Link to="/dialogs">Messages</Link>,
-  },
+  // {
+  //   key: 'Messages',
+  //   icon: <NotificationOutlined />,
+  //   label: <Link to="/dialogs">Messages</Link>,
+  // },
   {
     key: 'Developers',
     icon: <LaptopOutlined />,
