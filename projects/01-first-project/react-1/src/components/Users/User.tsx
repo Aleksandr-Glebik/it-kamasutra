@@ -13,25 +13,6 @@ type PropsType = {
     follow: (userId: number) => void
 }
 
-
-/*
-  <Card
-    hoverable
-    style={{ width: 240 }}
-    cover={<NavLink to={'/profile/' + user.id}>
-            <img src={user.photos.small != null ? user.photos.small : userPhoto} className={styles.userPhoto} alt="prhoto" />
-           </NavLink>
-          }
-  >
-    <Meta title={user.name} />
-    {user.followed
-    ? <Button disabled={followingInProgress.some(id => id === user.id)} onClick={ () => {unfollow(user.id)}}>Unfollow</Button>
-    : <Button disabled={followingInProgress.some(id => id === user.id)} onClick={ () => {follow(user.id)}}>Follow</Button>
-    }
-  </Card>
-*/
-
-
 const User: React.FC<PropsType> = ({user, followingInProgress, unfollow, follow}) => {
     return (
         <Card

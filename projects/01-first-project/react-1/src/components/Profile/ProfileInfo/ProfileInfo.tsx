@@ -6,6 +6,7 @@ import userPhoto from '../../../assets/img/user.jpg'
 import ProfileDataForm from './ProfileDataForm.tsx'
 import {ProfileType} from '../../../types/types.ts'
 import { ContactsType } from '../../../types/types'
+import { Image } from 'antd'
 
 type PropsType = {
   profile: ProfileType | null
@@ -44,7 +45,7 @@ const ProfileInfo: React.FC<PropsType> = ({profile, status, updateStatus, isOwne
       <div>
         <div className={styles.descriptionBlock}>
           <h2>{profile.aboutMe}</h2>
-          <img src={profile.photos.large || userPhoto} className={styles.mainPhoto}></img>
+          <Image src={profile.photos.large || userPhoto} className={styles.mainPhoto}></Image>
           {isOwner && <input type={"file"} onChange={onMainPhotoSelected}/>}
 
           { editMode
