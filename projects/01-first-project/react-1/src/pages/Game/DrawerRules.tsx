@@ -10,7 +10,7 @@ const DrawerRules: React.FC = () => {
     };
 
     const onClose = () => {
-    setOpen(false);
+        setOpen(false);
     };
 
     return (

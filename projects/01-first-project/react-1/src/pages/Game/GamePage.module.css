@@ -7,9 +7,22 @@
 .gameSection {
     width: 50%;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: flex-start;
     padding: 20px;
     margin-right: 20px;
+}
+.gameContent {
+    display: flex;
+    justify-content: space-between;
+}
+
+.gameResult {
+    margin-top: 1rem;
+}
+
+.winnerCard {
+
 }
 
 .setupSection {

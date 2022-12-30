@@ -5,7 +5,8 @@ import PersonCard from './PersonCard.tsx'
 import GameTimer from './GameTimer.tsx'
 import CastomFormCard from './CastomFormCard.tsx'
 import styles from './GamePage.module.css'
-import {PlusCircleOutlined, MinusCircleOutlined, PlayCircleOutlined, PauseCircleOutlined, MinusOutlined, RedoOutlined } from '@ant-design/icons'
+import {PlusCircleOutlined, MinusCircleOutlined, PlayCircleOutlined, PauseCircleOutlined, MinusOutlined, RedoOutlined, QuestionOutlined } from '@ant-design/icons'
+import WinnerAlert from "./WinnerAlert.tsx"
 
 const GamePage: React.FC = () => {
     return (
@@ -83,17 +84,28 @@ const Game: React.FC = () => {
         })
     }
 
+    const [showResult, setShowResult] = useState(false)
+
     return (
         <div className={styles.container}>
             <div className={styles.gameSection}>
-                <PersonCard cardTitle={nameOne} imageSrc={imageSrcOne} count={counter.c1} gender={genderOne}/>
-                <GameTimer
-                  className={styles.gameTimer}
-                  time={time}
-                  onChangeTime={setTime}
-                  play={play}
-                />
-                <PersonCard cardTitle={nameTwo} imageSrc={imageSrcTwo} count={counter.c2} gender={genderTwo}/>
+                <div className={styles.gameContent}>
+                    <PersonCard cardTitle={nameOne} imageSrc={imageSrcOne} count={counter.c1} gender={genderOne}/>
+                    <GameTimer
+                        className={styles.gameTimer}
+                        time={time}
+                        onChangeTime={setTime}
+                        play={play}
+                    />
+                    <PersonCard cardTitle={nameTwo} imageSrc={imageSrcTwo} count={counter.c2} gender={genderTwo}/>
+                </div>
+                {showResult && <div className={styles.gameResult}>
+                    <WinnerAlert
+                      className={styles.winnerCard}
+                      counter={counter}
+                      gamers={{nameOne, nameTwo}}
+                    />
+                </div>}
             </div>
             <div className={styles.setupSection}>
                 <div className={styles.setupSectionNav}>
@@ -179,6 +191,12 @@ const Game: React.FC = () => {
                                 }
                                 })}>
                                     <MinusOutlined style={{fontSize: '20px'}} />
+                                </Button>
+                                </div>
+                                <div style={{ display:'flex', justifyContent: 'space-between'}}>
+                                <p style={{ display:'inline-block' }}>Показать результат</p>
+                                <Button onClick={ () => setShowResult(prev => !prev)}>
+                                    <QuestionOutlined style={{fontSize: '20px'}} />
                                 </Button>
                                 </div>
                                 <div style={{ display:'flex', justifyContent: 'space-between', marginTop: '20px'}}>

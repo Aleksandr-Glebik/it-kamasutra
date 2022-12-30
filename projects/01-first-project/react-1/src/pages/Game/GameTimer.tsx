@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react"
 import { Space, TimePicker } from 'antd'
 import moment from 'moment'
 
-interface TimeType {
+export interface TimeType {
     minutes: number;
     seconds: number;
 }
